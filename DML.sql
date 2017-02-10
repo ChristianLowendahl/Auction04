@@ -20,8 +20,6 @@ DELIMITER //
 CREATE PROCEDURE RegistreProduct(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
 BEGIN
 
-DELIMITER //
-
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);
 END //
 
@@ -30,10 +28,14 @@ DELIMITER ;
 
 -- Lista pågående auktioner samt kunna se det högsta budet och vilken kund som lagt det.
 
-SELECT Customer.FirstName, Customer.LastName, Product.Name, MAX(Bid.Price) FROM Bid
-  INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-  INNER JOIN Auction ON Auction.ID = Bid.AuctionID
-  INNER JOIN Product ON Product.ID = Auction.ProductID
-  GROUP BY Customer.ID
-  ORDER BY Bid.Price DESC;
+CREATE VIEW HigherBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name, MAX(Bid.Price)
+  FROM Customer
+    LEFT JOIN Bid ON Customer.ID = Bid.CustomerID
+    LEFT JOIN Auction ON Auction.ID = Bid.AuctionID
+    LEFT JOIN Product ON Product.ID = Auction.ProductID
+  GROUP BY Product.Name;
+
+SELECT * FROM HigherBid;
 

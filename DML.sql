@@ -1,5 +1,5 @@
 -- Ni skall sedan skapa DML script för att kunna hantera dessa frågor:
--- Registrera en produkt
+-- 1 Registrera en produkt
 
 
 DELIMITER //
@@ -13,7 +13,7 @@ END //
 DELIMITER ;
 
 
--- Skapa en auktion utifrån en viss produkt där man kan sätta utgångspris, acceptpris samt start och slutdatum för auktionen.
+-- 2 Skapa en auktion utifrån en viss produkt där man kan sätta utgångspris, acceptpris samt start och slutdatum för auktionen.
 
 
 DELIMITER //
@@ -26,7 +26,7 @@ END //
 DELIMITER ;
 
 
--- Lista pågående auktioner samt kunna se det högsta budet och vilken kund som lagt det.
+-- 3 Lista pågående auktioner samt kunna se det högsta budet och vilken kund som lagt det.
 
 DROP VIEW IF EXISTS HigherBid;
 

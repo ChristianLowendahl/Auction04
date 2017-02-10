@@ -32,7 +32,7 @@ DROP VIEW IF EXISTS HigherBid;
 
 CREATE VIEW HigherBid
 AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price)
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
   FROM Auction
     INNER JOIN Bid ON Bid.AuctionID = Auction.ID
     INNER JOIN Customer ON Customer.ID = Bid.CustomerID

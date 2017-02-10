@@ -135,3 +135,5 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VA
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (6, 800, '2017-01-07', '20:05', 3);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (7, 700, '2017-01-08', '14:40', 4);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (8, 950, '2017-01-10', '16:50', 5);
+
+HEJ

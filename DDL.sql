@@ -36,6 +36,8 @@ CREATE TABLE Bid(
   BidDate DATE,
   BidTime TIME,
   Price INT,
+  CustomerID INT,
+  AuctionID INT,
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID),
   FOREIGN KEY (AuctionID) REFERENCES Auction (ID)
 );
@@ -105,9 +107,8 @@ INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VA
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (400, 800,'2017-02-25','2017-02-28',14);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (600, 1200,'2017-02-26','2017-02-29',15);
 
-
 INSERT INTO Bid (BidDate, BidTime, Price) VALUES ('','','');
 
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime) VALUES ('','','','');
 
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES ('','','','','');tionHistory (AuctionID, ProductID, CustomerID) VALUES ();
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES ('','','','','');

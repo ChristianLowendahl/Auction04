@@ -41,5 +41,26 @@ AS
 
 SELECT * FROM HigherBid;
 
+-- 4.4	Visa budhistorik
+-- 4.4.1	Se budhistoriken på en viss pågående auktion, samt vilka kunder som lagt buden.
+
+
+SELECT BidDate AS Date, BidTime AS Time, Price, Customer.FirstName AS 'First name', Customer.LastName AS 'Last name' FROM Bid
+  INNER JOIN Customer ON Bid.CustomerID = Customer.ID
+WHERE AuctionID = 2;
+
+
+-- 4.5	Visa avslutade auktioner
+-- 4.5.1	Visa vilka auktioner som avslutas under ett visst datumintervall samt provisionen för varje auktion inom det intervallet.
+
+SELECT AuctionHistory.AuctionID AS Auction, Product.Name AS Product, AuctionHistory.EndDate AS 'End date', ROUND((MAX(Price) * Product.Provision/100)) AS Commission FROM BiddingHistory
+  INNER JOIN AuctionHistory ON BiddingHistory.AuctionHistoryID = AuctionHistory.AuctionID
+  INNER JOIN Product ON AuctionHistory.ProductID = Product.ID
+WHERE AuctionHistory.EndDate BETWEEN '2017-01-01' AND '2017-01-31'
+GROUP BY Auction;
+
+-- 4.6	Skicka epost när auktion avslutas utan bud
+--  4.6.1	Skicka epost till Gunnar om en auktion avslutas utan något bud.
+SELECT * FROM AuctionHistory;
 
 

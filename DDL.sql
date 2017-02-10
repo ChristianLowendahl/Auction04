@@ -63,7 +63,6 @@ CREATE TABLE AuctionHistory(
 CREATE TABLE BiddingHistory(
   BidID INT PRIMARY KEY,
   Price INT,
-  FinalOffer INT,
   BidDate DATE,
   BidTime TIME,
   AuctionHistoryID INT,
@@ -90,11 +89,11 @@ INSERT INTO Supplier (Name, Email, Address, City) VALUES ('History Dealers','hd@
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Antique Shoppers','antiqueshoppers@mail.com','Bromsens klippa 4','Västerås');
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Perfect Finds','perfectfinds@mail.com','Klingens väg 67','Göteborg');
 
-INSERT INTO Product (Name, Description, Provision) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 10);
+INSERT INTO Product (Name, Description, Provision) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 10); -- 500, 1000, 1050
+INSERT INTO Product (Name, Description, Provision) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 30); -- 1500, 2500, 3000
+INSERT INTO Product (Name, Description, Provision) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 8); -- 400, 800, 800
+INSERT INTO Product (Name, Description, Provision) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 7); -- 400, 800, 700
+INSERT INTO Product (Name, Description, Provision) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 9); -- 800, 1700, 950
 INSERT INTO Product (Name, Description, Provision) VALUES ('Pälsjacka', 'Mink från 1960/70-tal.', 10);
 INSERT INTO Product (Name, Description, Provision) VALUES ('Portfölj', 'Läder portfölj från 1900-talet', 10);
 INSERT INTO Product (Name, Description, Provision) VALUES ('Porslin vaser', 'Ett par porslin och silver vaser från England', 10);
@@ -137,11 +136,11 @@ INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndD
 INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (4, 600, 1500,'2017-01-08','2017-01-11', 4, 7);
 INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (5, 800, 1700,'2017-01-10','2017-01-13', 5, 8);
 
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (1, 750, 1050,'2017-01-01','09:00', 1, 1);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (2, 1050, 1050,'2017-01-02','11:00', 1, 2);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (3, 1800, 3000,'2017-01-05', '10:30', 2, 3);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (4, 3000, 300,'2017-01-08', '14:15', 2, 4);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (5, 600, 800, '2017-01-06', '03:40', 3, 5);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (6, 800, 800, '2017-01-07', '20:05', 3, 6);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (7, 700, 700, '2017-01-08', '14:40', 4, 7);
-INSERT INTO BiddingHistory (BidID, Price, FinalOffer, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (8, 950, 950, '2017-01-10', '16:50', 5, 8);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (1, 750,'2017-01-01','09:00', 1, 1);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (2, 1050, '2017-01-02','11:00', 1, 2);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (3, 1800, '2017-01-05', '10:30', 2, 3);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (4, 3000, '2017-01-08', '14:15', 2, 4);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (5, 600, '2017-01-06', '03:40', 3, 5);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (6, 800, '2017-01-07', '20:05', 3, 6);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (7, 700, '2017-01-08', '14:40', 4, 7);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (8, 950, '2017-01-10', '16:50', 5, 8);

@@ -153,3 +153,10 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (6, 800, '2017-01-07', '20:05', 3, 6);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (7, 700, '2017-01-08', '14:40', 4, 7);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (8, 950, '2017-01-10', '16:50', 5, 8);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (9, 1000, '2017-01-10', '16:51', 5, 1);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (10, 2000, '2017-01-10', '16:52', 5, 2);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (11, 3000, '2017-01-10', '16:53', 5, 3);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (12, 3500, '2017-01-10', '16:54', 5, 8);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (13, 4000, '2017-01-10', '16:55', 5, 2);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);

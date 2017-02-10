@@ -28,14 +28,18 @@ DELIMITER ;
 
 -- Lista pågående auktioner samt kunna se det högsta budet och vilken kund som lagt det.
 
+DROP VIEW IF EXISTS HigherBid;
+
 CREATE VIEW HigherBid
 AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name, MAX(Bid.Price)
-  FROM Customer
-    LEFT JOIN Bid ON Customer.ID = Bid.CustomerID
-    LEFT JOIN Auction ON Auction.ID = Bid.AuctionID
-    LEFT JOIN Product ON Product.ID = Auction.ProductID
-  GROUP BY Product.Name;
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price)
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
+  GROUP BY Auction.ID;
 
 SELECT * FROM HigherBid;
+
+
 

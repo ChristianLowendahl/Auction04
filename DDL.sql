@@ -46,6 +46,7 @@ CREATE TABLE BiddingHistory(
   Price INT,
   BidDate DATE,
   BidTime TIME,
+  AuctionHistoryID INT,
   FOREIGN KEY (AuctionHistoryID) REFERENCES AuctionHistory (ID),
 );
 CREATE TABLE AuctionHistory(
@@ -107,8 +108,32 @@ INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VA
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (400, 800,'2017-02-25','2017-02-28',14);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (600, 1200,'2017-02-26','2017-02-29',15);
 
-INSERT INTO Bid (BidDate, BidTime, Price) VALUES ('','','');
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-01','09:00',750, 1, 1);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-02', '11:00', 1050, 2, 1);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-05', '10:30', 1800, 3, 2);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-08', '14:15', 3000, 4, 2);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-06', '03:40', 600, 5, 3);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-07', '20:05', 800, 6, 3);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-08', '14:40', 700, 7, 4);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-10', '16:50', 950, 8, 5);
 
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime) VALUES ('','','','');
 
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES ('','','','','');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (1,500,1000,'2017-01-01','2017-01-04');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (2, 1500, 2500,'2017-01-05','2017-01-08');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (3,400, 800,'2017-01-06','2017-01-09');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (4, 600, 1500,'2017-01-08','2017-01-11');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (5,800, 1700,'2017-01-10','2017-01-13');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (6, 500, 2000,'2017-01-11','2017-01-14');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (7, 600, 1400,'2017-01-13','2017-01-16');
+INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate) VALUES (8, 400, 800,'2017-01-17','2017-01-20');
+
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (1, 750, '2017-01-01','09:00', 1);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (2, 1050,'2017-01-02','11:00', 1);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (3, 1800, '2017-01-05', '10:30', 2);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (4, 3000, '2017-01-08', '14:15', 2);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (5, 600, '2017-01-06', '03:40', 3);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (6, 800, '2017-01-07', '20:05', 3);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (7, 700, '2017-01-08', '14:40', 4);
+INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (8, 950, '2017-01-10', '16:50', 5);
+
+HEJ

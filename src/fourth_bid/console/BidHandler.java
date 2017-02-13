@@ -37,7 +37,7 @@ public class BidHandler {
         System.out.println("Write 'all' to show all bids.");
         System.out.println("Write 'higher' to show only the higher bids.");
         System.out.println("Write 'menu' to go back to menu.");
-        System.out.print("Skriv här: ");
+        System.out.print("Write here: ");
 
     }
 

@@ -62,7 +62,7 @@ public class Menu {
 
             String  str = In.inText();
             switch (str) {
-                case "avsluta":
+                case "exit":
                     System.exit(0);
                     break;
                 case "menu":
@@ -95,7 +95,7 @@ public class Menu {
     private void printGoBackMenu(){
         System.out.println("\n***************************************\n");
 
-        System.out.println("Skriv 'avsluta' för avsluta programmet.");
+        System.out.println("Skriv 'exit' för avsluta programmet.");
         System.out.println("Skriv 'menu' för top menu.");
         System.out.print("Skriv här: ");
     }

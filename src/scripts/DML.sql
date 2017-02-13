@@ -64,3 +64,25 @@ GROUP BY Auction;
 SELECT * FROM AuctionHistory;
 
 
+
+-- Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
+
+CREATE VIEW CustomersValue
+  AS
+  SELECT Customer.FirstName, Customer.LastName, SUM(BiddingHistory.FinalOffer) AS TotalorderValue FROM Customer
+  INNER JOIN BiddingHistory ON BiddingHistory.CustomerID = Customer.ID WHERE FinalOffer IS NOT NULL
+  GROUP BY FirstName, LastName;
+
+SELECT * FROM CustomersValue;
+
+-- Vad den totala provisionen är per månad.
+
+DROP VIEW IF EXISTS TotalCommissionPerMonth;
+CREATE VIEW TotalCommissionPerMonth
+  AS
+  SELECT MONTH(Auction.EndDate) AS Month, SUM(Product.Provision) AS TotalProvision FROM Auction
+  INNER JOIN Product ON Auction.ProductID = Product.ID
+  GROUP BY MONTH(Auction.EndDate);
+
+SELECT * FROM TotalCommissionPerMonth;
+

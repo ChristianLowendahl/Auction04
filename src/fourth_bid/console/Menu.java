@@ -78,15 +78,15 @@ public class Menu {
 
         System.out.println("[0] To exit.");
         System.out.println("[1] Add new supplier.");
-        System.out.println("[2] fråga 2.");
-        System.out.println("[3] fråga 3.");
-        System.out.println("[4] List bids 4.");
-        System.out.println("[5] fråga 5.");
-        System.out.println("[6] fråga 6.");
-        System.out.println("[7] fråga 7.");
-        System.out.println("[8] fråga 8.");
-        System.out.println("[9] fråga 9.");
-        System.out.println("[10] fråga 10.");
+        System.out.println("[2] Question 2.");
+        System.out.println("[3] Question 3.");
+        System.out.println("[4] List bids.");
+        System.out.println("[5] Question 5.");
+        System.out.println("[6] Question 6.");
+        System.out.println("[7] Question 7.");
+        System.out.println("[8] Question 8.");
+        System.out.println("[9] Question 9.");
+        System.out.println("[10] Question 10.");
 
 
         System.out.print("\nChoose a [number]: ");

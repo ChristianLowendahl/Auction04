@@ -12,6 +12,7 @@ public class Login {
     protected static String user = "root";
     protected static String pass = "nack";
     protected static String host = "localhost";
+    protected static String database = "Auction";
     public static Connection conn;
 
 
@@ -24,7 +25,7 @@ public class Login {
         }
 
          conn = DriverManager.getConnection
-                ("jdbc:mysql://" + host + ":3306/Auction?useSSL=false", user, pass);
+                ("jdbc:mysql://" + host + ":3306/" + database +"?useSSL=false", user, pass);
     }
 
 }

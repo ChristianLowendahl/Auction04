@@ -1,6 +1,5 @@
 package fourth_bid;
 
-
 import java.util.ArrayList;
 
 public class BiddingHistory {
@@ -15,6 +14,15 @@ public class BiddingHistory {
     private Bid bid;
     private AuctionHistory auctionHistory;
     private Customer customer;
+
+    public BiddingHistory(int bidID, int price, String bidDate, String bidTime, int auctionHistoryID, int customerID) {
+        this.bidID = bidID;
+        this.price = price;
+        this.bidDate = bidDate;
+        this.bidTime = bidTime;
+        this.auctionHistoryID = auctionHistoryID;
+        this.customerID = customerID;
+    }
 
     public void setRelation(ArrayList<Bid> list1, ArrayList<AuctionHistory> list2, ArrayList<Customer> list3) {
         for (Bid i : list1) {
@@ -35,7 +43,6 @@ public class BiddingHistory {
             }
         }
     }
-
 
     public Bid getBid() {
         return bid;
@@ -59,15 +66,6 @@ public class BiddingHistory {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }
-
-    public BiddingHistory(int bidID, int price, String bidDate, String bidTime, int auctionHistoryID, int customerID) {
-        this.bidID = bidID;
-        this.price = price;
-        this.bidDate = bidDate;
-        this.bidTime = bidTime;
-        this.auctionHistoryID = auctionHistoryID;
-        this.customerID = customerID;
     }
 
     public int getBidID() {

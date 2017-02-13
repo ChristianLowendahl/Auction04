@@ -74,12 +74,12 @@ public class Menu {
 
     private void printTopMenu(){
 
-        System.out.println("[1] För G fråga 1.\t\t\t\t[7] För VG fråga 1.");
-        System.out.println("[2] För G fråga 2.\t\t\t\t[8] För VG fråga 2.");
-        System.out.println("[3] För G fråga 3.\t\t\t\t[9] För VG fråga 3.");
-        System.out.println("[4] För G fråga 4.\t\t\t\t[10] För VG fråga 4.");
-        System.out.println("[5] För G fråga 5.");
-        System.out.println("[6] För G fråga 6.\t\t\t\t[0] Avsluta programmet.");
+        System.out.println("[1] Add new supplier.\t\t\t\t[7] fråga 1.");
+        System.out.println("[2] fråga 2.\t\t\t\t[8] fråga 2.");
+        System.out.println("[3] fråga 3.\t\t\t\t[9] fråga 3.");
+        System.out.println("[4] fråga 4.\t\t\t\t[10] fråga 4.");
+        System.out.println("[5] fråga 5.");
+        System.out.println("[6] fråga 6.\t\t\t\t[0] Avsluta programmet.");
 
         System.out.print("\nVälj ett [tal]: ");
     }

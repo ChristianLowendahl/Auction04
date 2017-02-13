@@ -1,6 +1,8 @@
 package fourth_bid;
 
 
+import java.util.ArrayList;
+
 public class AuctionHistory {
 
     private int auctionID;
@@ -14,6 +16,26 @@ public class AuctionHistory {
     private Auction auction;
     private Product product;
     private Customer customer;
+
+    public void setRelation(ArrayList<Auction> list1, ArrayList<Product> list2, ArrayList<Customer> list3) {
+        for (Auction i : list1) {
+            if (i.getId() == this.auctionID) {
+                this.auction = i;
+            }
+        }
+
+        for (Product i : list2) {
+            if (i.getId() == this.productID) {
+                this.product = i;
+            }
+        }
+
+        for (Customer i : list3) {
+            if (i.getId() == this.customerID) {
+                this.customer = i;
+            }
+        }
+    }
 
     public Auction getAuction() {
         return auction;

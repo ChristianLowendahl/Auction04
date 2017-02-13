@@ -1,6 +1,8 @@
 package fourth_bid;
 
 
+import java.util.ArrayList;
+
 public class Auction {
     private int id;
     private int startingBid;
@@ -15,8 +17,12 @@ public class Auction {
         return product;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setRelation(ArrayList<Product> list) {
+        for (Product i : list) {
+            if (i.getId() == this.productID) {
+                this.product = i;
+            }
+        }
     }
 
     public Auction(int id, int startingBid, int acceptOffer, String startDate, String endDate, int productID) {

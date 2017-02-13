@@ -9,11 +9,11 @@ import java.sql.SQLException;
 
 public class Login {
 
-    protected static String user = "root";
-    protected static String pass = "nack";
-    protected static String host = "localhost";
-    protected static String database = "Auction";
-    public static Connection conn;
+    private static String user = "root";
+    private static String pass = "nack";
+    private static String host = "localhost";
+    private static String database = "Auction";
+    static Connection conn;
 
 
     public void login() throws SQLException {

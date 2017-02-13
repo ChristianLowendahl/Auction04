@@ -1,11 +1,13 @@
-package fourth_bid;
+package fourth_bid.console;
+
+import fourth_bid.*;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
 public class Loader {
-    public void loadAllData() throws IOException, SQLException {
+    public void loadAllData() throws IOException, SQLException{
 
 
         ArrayList<Customer> customers = new ArrayList<>();
@@ -21,7 +23,7 @@ public class Loader {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction04?useSSL=false", "root", "nack");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack");
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Customer;");
@@ -30,7 +32,7 @@ public class Loader {
                 customers.add(new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getString(5), rs.getString(6), rs.getString(7)));
 
             stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM Suplier;");
+            rs = stm.executeQuery("SELECT * FROM Supplier;");
 
             while (rs.next())
                 suppliers.add(new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));

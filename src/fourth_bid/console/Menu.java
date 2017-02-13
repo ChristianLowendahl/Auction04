@@ -1,6 +1,5 @@
 package fourth_bid.console;
 
-
 import java.sql.SQLException;
 
 public class Menu {

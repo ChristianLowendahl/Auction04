@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Loader {
-    public void loadAllData() throws IOException, SQLException{
+    public void loadAllData() throws IOException, SQLException {
 
 
         ArrayList<Customer> customers = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Loader {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auktion?useSSL=false", "root", "katia1234");
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Customer;");

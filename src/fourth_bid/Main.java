@@ -1,7 +1,5 @@
 package fourth_bid;
 
-import fourth_bid.console.Loader;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -12,6 +10,8 @@ public class Main  {
 
         Loader loader = new Loader();
         loader.loadAllData();
+
+        // HEJ
 
     }
 }

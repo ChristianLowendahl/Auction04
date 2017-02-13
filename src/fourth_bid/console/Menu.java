@@ -17,7 +17,8 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 1:
-                    System.exit(0);
+                    SupplierHandler handler = new SupplierHandler();
+                    handler.addSupplier();
                     break;
                 case 2:
                     System.exit(0);

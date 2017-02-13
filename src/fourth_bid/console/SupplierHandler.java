@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class SupplierHandler {
 
-    private void addSupplier() throws IOException, SQLException {
+    public void addSupplier() throws IOException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;

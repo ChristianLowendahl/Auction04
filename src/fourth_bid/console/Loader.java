@@ -1,4 +1,6 @@
-package fourth_bid;
+package fourth_bid.console;
+
+import fourth_bid.*;
 
 import java.io.IOException;
 import java.sql.*;

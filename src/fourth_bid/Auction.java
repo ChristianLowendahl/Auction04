@@ -9,6 +9,15 @@ public class Auction {
     private String endDate;
     private int productID;
 
+    private Product product;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Auction(int id, int startingBid, int acceptOffer, String startDate, String endDate, int productID) {
         this.id = id;

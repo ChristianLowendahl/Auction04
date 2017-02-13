@@ -1,8 +1,6 @@
 package fourth_bid;
 
-/**
- * Created by Katia on 2017-02-13.
- */
+
 public class AuctionHistory {
 
     private int auctionID;
@@ -12,6 +10,34 @@ public class AuctionHistory {
     private String endDate;
     private int productID;
     private int customerID;
+
+    private Auction auction;
+    private Product product;
+    private Customer customer;
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public AuctionHistory(int auctionID, String startingBid, int acceptOffer, String startDate, String endDate, int productID, int customerID) {
         this.auctionID = auctionID;

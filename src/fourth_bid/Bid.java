@@ -1,8 +1,6 @@
 package fourth_bid;
 
-/**
- * Created by Katia on 2017-02-13.
- */
+
 public class Bid {
 
     private int id;
@@ -11,6 +9,25 @@ public class Bid {
     private String price;
     private int CustomerID;
     private int auctionID;
+
+    private Customer customer;
+    private Auction auction;
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Auction getAuction() {
+        return auction;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
+    }
 
     public Bid(int id, String bidDate, String bidTime, String price, int customerID, int auctionID) {
 

@@ -46,7 +46,10 @@ public class BidHandler {
         Statement stm = null;
         ResultSet rs = null;
 
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack"))
+        Login database = new Login();
+        database.login();
+
+        try (Connection con =  database.conn)
         {
 
             stm = con.createStatement();
@@ -88,7 +91,10 @@ public class BidHandler {
         Statement stm = null;
         ResultSet rs = null;
 
-        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack"))
+        Login database = new Login();
+        database.login();
+
+        try (Connection con = database.conn)
         {
 
             stm = con.createStatement();

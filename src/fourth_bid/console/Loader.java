@@ -25,7 +25,12 @@ public class Loader {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack");
+
+            Login database = new Login();
+            database.login();
+
+
+            con = database.conn;
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Customer;");
@@ -71,7 +76,7 @@ public class Loader {
 
 
             // SKAPA RELATIONER:
-
+            System.out.println("**********************");
 
             for (Customer i : customers){
                 System.out.println(i);
@@ -104,6 +109,8 @@ public class Loader {
                 i.setRelation(bids, auctionHistories, customers);
                 System.out.println(i);
             }
+
+            System.out.println("**********************");
 
         } catch (SQLException e) {
             e.printStackTrace();

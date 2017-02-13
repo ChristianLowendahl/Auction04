@@ -1,17 +1,34 @@
 package fourth_bid;
 
 
+import java.util.ArrayList;
+
 public class Bid {
 
     private int id;
     private String bidDate;
     private String bidTime;
     private String price;
-    private int CustomerID;
+    private int customerID;
     private int auctionID;
 
     private Customer customer;
     private Auction auction;
+
+    public void setRelation(ArrayList<Auction> list1, ArrayList<Customer> list2) {
+        for (Auction i : list1) {
+            if (i.getId() == this.auctionID) {
+                this.auction = i;
+            }
+        }
+
+        for (Customer i : list2) {
+            if (i.getId() == this.customerID) {
+                this.customer = i;
+            }
+        }
+    }
+
 
     public Customer getCustomer() {
         return customer;
@@ -35,7 +52,7 @@ public class Bid {
         this.bidDate = bidDate;
         this.bidTime = bidTime;
         this.price = price;
-        CustomerID = customerID;
+        customerID = customerID;
         this.auctionID = auctionID;
     }
 
@@ -72,11 +89,11 @@ public class Bid {
     }
 
     public int getCustomerID() {
-        return CustomerID;
+        return customerID;
     }
 
     public void setCustomerID(int customerID) {
-        CustomerID = customerID;
+        customerID = customerID;
     }
 
     public int getAuctionID() {

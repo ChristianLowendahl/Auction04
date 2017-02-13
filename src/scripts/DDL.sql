@@ -71,6 +71,16 @@ CREATE TABLE BiddingHistory(
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID)
 );
 
+CREATE TABLE FailedAuctionHistory (
+  AuctionID   INT PRIMARY KEY,
+  StartingBid INT,
+  AcceptOffer INT,
+  StartDate   DATE,
+  EndDate     DATE,
+  ProductID   INT,
+  FOREIGN KEY (ProductID) REFERENCES Product (ID)
+);
+
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Anna', 'Andersson', '0701111111', 'annas@mail.se', 'gatan 7', 'Stockholm');
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Jessica', 'Svensson', '0732345678', 'Jessica@mail.se', 'Näckrosgatan 11', 'Stockholm');
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Rickard', 'Asplund', '0708564345', 'rickard@mail.se', 'Storgatan 10', 'Göteborg');

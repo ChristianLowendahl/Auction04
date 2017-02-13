@@ -1,6 +1,5 @@
 package fourth_bid;
 
-
 import fourth_bid.console.Loader;
 
 import java.io.IOException;

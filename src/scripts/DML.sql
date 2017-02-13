@@ -18,7 +18,7 @@ DELIMITER ;
 
 
 DELIMITER //
-CREATE PROCEDURE RegistreProduct(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
+CREATE PROCEDURE RegistreAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
 BEGIN
 
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);

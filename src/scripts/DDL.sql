@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS Auction04;
 CREATE DATABASE Auction04;
 Use Auction04;
 
+
+
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   FirstName VARCHAR(50),
@@ -175,7 +177,7 @@ CREATE PROCEDURE RegistreProduct(NewName VARCHAR(50), NewDescription VARCHAR(200
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE RegistreProduct(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
+CREATE PROCEDURE RegistreAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
   BEGIN
 
     INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);

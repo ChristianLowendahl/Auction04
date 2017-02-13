@@ -1,6 +1,5 @@
 package fourth_bid;
 
-
 public class Supplier {
 
     private int id;
@@ -57,5 +56,3 @@ public class Supplier {
         this.city = city;
     }
 }
-
-

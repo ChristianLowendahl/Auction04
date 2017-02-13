@@ -103,7 +103,6 @@ public class Loader {
                 System.out.println(i);
             }
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -117,8 +116,6 @@ public class Loader {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 }

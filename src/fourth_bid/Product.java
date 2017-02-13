@@ -1,6 +1,5 @@
 package fourth_bid;
 
-
 public class Product {
 
     private int id;

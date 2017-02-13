@@ -1,4 +1,5 @@
-package fourth_bid;
+import fourth_bid.console.Loader;
+import fourth_bid.console.Menu;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,6 +11,9 @@ public class Main  {
 
         Loader loader = new Loader();
         loader.loadAllData();
+
+        Menu menu = new Menu();
+        menu.welcome();
 
         // HEJ
 

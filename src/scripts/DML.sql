@@ -13,6 +13,7 @@ END //
 DELIMITER ;
 
 
+
 -- 2 Skapa en auktion utifrån en viss produkt där man kan sätta utgångspris, acceptpris samt start och slutdatum för auktionen.
 
 
@@ -22,6 +23,20 @@ BEGIN
 
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);
 END //
+
+DELIMITER ;
+
+-- Extra Procedure
+
+USE Auction;
+
+DELIMITER //
+CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
+
+  END //
 
 DELIMITER ;
 

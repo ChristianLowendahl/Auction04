@@ -47,7 +47,7 @@ public class Menu {
                     System.exit(0);
                     break;
                 default:
-                    System.out.println("Felaktigt menyval");
+                    System.out.println("Invalid choice!");
             }
         }
 

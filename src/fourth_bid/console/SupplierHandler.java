@@ -27,7 +27,7 @@ public class SupplierHandler {
 
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false","root", "nack");
 
-            stm = con.prepareStatement("INSERT INTO Supplier VALUES(?, ?, ?, ?)");
+            stm = con.prepareStatement("{CALL AddSupplier(?, ?, ?, ?)}");
             stm.setString(1, name);
             stm.setString(2, email);
             stm.setString(3, address);

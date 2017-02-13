@@ -23,7 +23,7 @@ public class Loader {
         ResultSet rs = null;
 
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auktion?useSSL=false", "root", "katia1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack");
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Customer;");

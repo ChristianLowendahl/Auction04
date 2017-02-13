@@ -33,7 +33,7 @@ public class BidHandler {
 
 
     private void printSubMenu(){
-
+        System.out.println("\n***************************************\n");
         System.out.println("Write 'all' to show all bids.");
         System.out.println("Write 'higher' to show only the higher bids.");
         System.out.println("Write 'menu' to go back to menu.");
@@ -42,6 +42,8 @@ public class BidHandler {
     }
 
     private void listAllBid() throws IOException, SQLException {
+
+        System.out.println("\n***************************************\n");
 
         Statement stm = null;
         ResultSet rs = null;
@@ -56,13 +58,17 @@ public class BidHandler {
             rs = stm.executeQuery("SELECT * FROM AllBid;");
 
             while (rs.next()){
-                int id = rs.getInt("ID");
+                //int id = rs.getInt("ID");
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 String product = rs.getString("Product");
                 String higherBid = rs.getString("HigherBid");
 
-                System.out.println(firstName + "\t" + lastName + "\t\t\t" + product  + "\t\t\t" + higherBid + "\n");
+
+
+                System.out.println( "Customer: \t"  +  firstName + "\t" + lastName + "\n" +
+                                    "Product: \t" + product  + "\n" +
+                                    "Bid: \t" + higherBid + "\n");
             }
 
         } catch (SQLException e) {
@@ -80,13 +86,14 @@ public class BidHandler {
                 e.printStackTrace();
             }
 
-            Menu menu = new Menu();
-            menu.goBackToMenu();
+            subMenu();
         }
     }
 
 
     private void listHigherBid() throws IOException, SQLException {
+
+        System.out.println("\n***************************************\n");
 
         Statement stm = null;
         ResultSet rs = null;
@@ -107,7 +114,9 @@ public class BidHandler {
                 String product = rs.getString("Product");
                 String higherBid = rs.getString("HigherBid");
 
-                System.out.println(firstName + "\t" + lastName + "\t\t\t" + product  + "\t\t\t" + higherBid + "\n");
+                System.out.println( "Customer: \t"  +  firstName + "\t" + lastName + "\n" +
+                        "Product: \t" + product  + "\n" +
+                        "Higher Bid: \t" + higherBid + "\n");
             }
 
         } catch (SQLException e) {
@@ -125,8 +134,7 @@ public class BidHandler {
                 e.printStackTrace();
             }
 
-            Menu menu = new Menu();
-            menu.goBackToMenu();
+            subMenu();
         }
     }
 }

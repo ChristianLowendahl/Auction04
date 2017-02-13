@@ -41,8 +41,11 @@ public class UserVerifier {
         Statement stm = null;
         ResultSet rs = null;
 
+        Login database = new Login();
+        database.login();
+
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false", "root", "nack");
+            con = database.conn;
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM User;");

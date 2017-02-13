@@ -2,12 +2,13 @@ package fourth_bid;
 
 
 public class Auction {
-    public int id;
-    public int startingBid;
-    public int acceptOffer;
-    public String startDate;
-    public String endDate;
-    public int productID;
+    private int id;
+    private int startingBid;
+    private int acceptOffer;
+    private String startDate;
+    private String endDate;
+    private int productID;
+
 
     public Auction(int id, int startingBid, int acceptOffer, String startDate, String endDate, int productID) {
         this.id = id;

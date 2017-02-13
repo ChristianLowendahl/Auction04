@@ -162,3 +162,50 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (13, 4000, '2017-01-10', '16:55', 5, 2);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);
+
+
+DELIMITER //
+CREATE PROCEDURE RegistreProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
+  BEGIN
+
+    INSERT INTO Product (Name, Description, Provision) VALUES (NewName, NewDescription , NewProvision);
+
+  END //
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE RegistreProduct(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
+  BEGIN
+
+    INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);
+  END //
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
+
+  END //
+
+DELIMITER ;
+
+CREATE VIEW HigherBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
+  GROUP BY Auction.ID;
+
+CREATE VIEW AllBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID;

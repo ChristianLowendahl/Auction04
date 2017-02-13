@@ -69,7 +69,7 @@ public class Menu {
                     welcome();
                     break;
                 default:
-                    System.out.println("Felaktigt menyval");
+                    System.out.println("Invalid command!");
             }
         }
     }
@@ -95,9 +95,9 @@ public class Menu {
     private void printGoBackMenu(){
         System.out.println("\n***************************************\n");
 
-        System.out.println("Skriv 'exit' för avsluta programmet.");
-        System.out.println("Skriv 'menu' för top menu.");
-        System.out.print("Skriv här: ");
+        System.out.println("Write 'exit' to finish.");
+        System.out.println("Write 'menu' for top menu.");
+        System.out.print("Write here: ");
     }
 
 }

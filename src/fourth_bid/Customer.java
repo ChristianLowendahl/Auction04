@@ -75,4 +75,8 @@ public class Customer {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String toString(){
+        return "Customer: " + this.id + ".";
+    }
 }

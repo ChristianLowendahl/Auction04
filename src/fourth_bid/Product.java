@@ -45,4 +45,8 @@ public class Product {
     public void setProvision(int provision) {
         this.provision = provision;
     }
+
+    public String toString(){
+        return "Product: " + this.id + ".";
+    }
 }

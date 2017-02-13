@@ -2,6 +2,19 @@ DROP DATABASE IF EXISTS Auction04;
 CREATE DATABASE Auction04;
 Use Auction04;
 
+CREATE TABLE User(
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  UserName VARCHAR(50),
+  Email VARCHAR(50),
+  Password VARCHAR(4)
+);
+
+INSERT INTO User (UserName, Email, Password) VALUES ('luiz', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('isa', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
 
 
 CREATE TABLE Customer(

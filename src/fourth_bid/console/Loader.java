@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class Loader {
+
     public void loadAllData() throws IOException, SQLException {
 
 

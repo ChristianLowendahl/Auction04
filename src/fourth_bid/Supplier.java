@@ -55,4 +55,8 @@ public class Supplier {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String toString(){
+        return "Supplier: " + this.id + ".";
+    }
 }

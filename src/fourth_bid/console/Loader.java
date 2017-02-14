@@ -48,7 +48,7 @@ public class Loader {
             rs = stm.executeQuery("SELECT * FROM Product;");
 
             while (rs.next())
-                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getInt(5)));
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM Auction;");
@@ -87,6 +87,7 @@ public class Loader {
             }
 
             for (Product i : products){
+                i.setRelation(suppliers);
                 System.out.println(i);
             }
 

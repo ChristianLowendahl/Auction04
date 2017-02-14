@@ -119,21 +119,21 @@ INSERT INTO Supplier (Name, Email, Address, City) VALUES ('History Dealers','hd@
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Antique Shoppers','antiqueshoppers@mail.com','Bromsens klippa 4','Västerås');
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Perfect Finds','perfectfinds@mail.com','Klingens väg 67','Göteborg');
 
-INSERT INTO Product (Name, Description, Provision) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 10); -- 500, 1000, 1050
-INSERT INTO Product (Name, Description, Provision) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 30); -- 1500, 2500, 3000
-INSERT INTO Product (Name, Description, Provision) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 8); -- 400, 800, 800
-INSERT INTO Product (Name, Description, Provision) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 7); -- 400, 800, 700
-INSERT INTO Product (Name, Description, Provision) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 9); -- 800, 1700, 950
-INSERT INTO Product (Name, Description, Provision) VALUES ('Pälsjacka', 'Mink från 1960/70-tal.', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Portfölj', 'Läder portfölj från 1900-talet', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Porslin vaser', 'Ett par porslin och silver vaser från England', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Ljusplåtar', 'ett par ljusplåtar av mässing från 1900-tal.', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Kaffeservis', '37 delar kaffeservis, Rörstrand från 1900-talets mitt', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Kalle Anka serietidningar', '2 st, nr. 1 januari 1951 och 1952', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Ånglok', 'MÄRKLIN ånglok SK800 med tender', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Blunddocka', 'porslinshuvud, armar och ben från 1900-talets första kvartal', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Jordglob', 'Jordglob av glas från 1900-talets andra hälft', 10);
-INSERT INTO Product (Name, Description, Provision) VALUES ('Tavla', 'Skogsmotiv, olja på duk, signerad', 10);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 10, 1); -- 500, 1000, 1050
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 30, 2); -- 1500, 2500, 3000
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 8, 3); -- 400, 800, 800
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 7, 4); -- 400, 800, 700
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 9, 5); -- 800, 1700, 950
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Pälsjacka', 'Mink från 1960/70-tal.', 10, 6);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Portfölj', 'Läder portfölj från 1900-talet', 10, 1);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin vaser', 'Ett par porslin och silver vaser från England', 10, 2);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ljusplåtar', 'ett par ljusplåtar av mässing från 1900-tal.', 10, 3);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kaffeservis', '37 delar kaffeservis, Rörstrand från 1900-talets mitt', 10, 4);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kalle Anka serietidningar', '2 st, nr. 1 januari 1951 och 1952', 10, 5);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ånglok', 'MÄRKLIN ånglok SK800 med tender', 10, 6);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Blunddocka', 'porslinshuvud, armar och ben från 1900-talets första kvartal', 10, 1);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Jordglob', 'Jordglob av glas från 1900-talets andra hälft', 10, 2);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Tavla', 'Skogsmotiv, olja på duk, signerad', 10, 3);
 
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (700, 1050,'2017-01-01','2017-01-04',1);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (1500, 3000,'2017-01-05','2017-01-08',2);

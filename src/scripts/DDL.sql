@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS Auction04;
 CREATE DATABASE Auction04;
 Use Auction04;
 
+SET sql_mode = '';
+
 CREATE TABLE User(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   UserName VARCHAR(50),
@@ -256,5 +258,6 @@ AS
 -- DML BOOT
 CREATE VIEW CustomersValue
 AS
-  SELECT FirstName, LastName, SUM(HigherBid) FROM HigherBid
+  SELECT FirstName, LastName, SUM(HigherBid) AS TotalValue FROM HigherBid
   GROUP BY FirstName;
+

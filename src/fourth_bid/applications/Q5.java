@@ -20,7 +20,6 @@ public class Q5 {
         String endDate = scanner.nextLine();
 
         try {
-
             Login database = new Login();
             database.login();
 
@@ -41,7 +40,8 @@ public class Q5 {
                 String productName = rs.getString("Name");
                 String provision = rs.getString("Provision");
 
-                System.out.println(id + " " + sDate + " " + eDate + " " + productName + " " + provision);
+                System.out.println("ID: " + id + " Start Date: " + sDate + " End Date: " + eDate +
+                        " Product: " + productName + " Commission " + provision);
 
             }
 

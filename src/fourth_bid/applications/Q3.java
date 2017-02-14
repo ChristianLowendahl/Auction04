@@ -4,7 +4,6 @@ package fourth_bid.applications;
 import fourth_bid.Auction;
 import fourth_bid.Product;
 import fourth_bid.Supplier;
-import fourth_bid.console.In;
 import fourth_bid.console.Login;
 import fourth_bid.console.Menu;
 

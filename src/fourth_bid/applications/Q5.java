@@ -1,17 +1,14 @@
 package fourth_bid.applications;
 
 import fourth_bid.console.Login;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import fourth_bid.console.Menu;
+
+import java.io.IOException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Q5 {
-    //Vilka auktioner avslutas under ett visst datumintervall? Samt vad blir
-    //provisionen för varje auktion inom det intervallet?
-
-    public void finishedAuctions() {
+    public void finishedAuctions() throws IOException, SQLException {
         Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
@@ -31,22 +28,48 @@ public class Q5 {
 
             stm = con.prepareStatement("SELECT Auction.ID, Auction.StartDate, Auction.EndDate, Product.Name, Product.Provision " +
                     "FROM Auction INNER JOIN Product ON Auction.ProductID = Product.ID " +
-                    "WHERE StartDate = ? AND EndDate = ?");
+                    "WHERE StartDate > ? AND EndDate < ?");
+
             stm.setString(1, startDate);
             stm.setString(2, endDate);
             rs = stm.executeQuery();
 
-            while (rs.next()) {
+            while(rs.next()) {
                 String id = rs.getString("ID");
                 String sDate = rs.getString("StartDate");
                 String eDate = rs.getString("EndDate");
-                String productName = rs.getString("Product.Name");
-                String provision = rs.getString("Product.Provision");
+                String productName = rs.getString("Name");
+                String provision = rs.getString("Provision");
 
-                System.out.println(id + sDate + eDate + productName + provision);
+                System.out.println(id + " " + sDate + " " + eDate + " " + productName + " " + provision);
+
             }
-        }catch (SQLException e){
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(rs != null)
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (stm != null)
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if( con != null)
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            Menu menu = new Menu();
+            menu.goBackToMenu();
         }
     }
 }

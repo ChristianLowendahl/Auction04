@@ -31,23 +31,24 @@ public class UserVerifier {
 
         try {
             index = userNames.indexOf(userName);
+
+
+
+            if (users.get(index).getPassword().equals(password)){
+                System.out.println("Welcome to Fourth Bid!");
+
+                Loader loader = new Loader();
+                loader.loadAllData();
+
+                Menu menu = new Menu();
+                menu.welcome();
+
+            } else {
+                System.out.println("Wrong password!");
+                run();
+            }
         } catch (Exception e){
             System.out.println("User not found!");
-            run();
-        }
-
-
-        if (users.get(index).getPassword().equals(password)){
-            System.out.println("Welcome to Fourth Bid!");
-
-            Loader loader = new Loader();
-            loader.loadAllData();
-
-            Menu menu = new Menu();
-            menu.welcome();
-
-        } else {
-            System.out.println("Wrong password!");
             run();
         }
     }

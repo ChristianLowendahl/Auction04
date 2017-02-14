@@ -62,7 +62,7 @@ public class Q3 {
         }
 
         System.out.print("\nChoose a number between [1] and [" + products.size() + "]\n" +
-                "to select a product from supplier: " + suppliers.get(indexSupplier).getName() + ".");
+                "to select a product from supplier " + suppliers.get(indexSupplier-1).getName() + ": ");
 
         input = sc.nextLine();
         indexProduct = Integer.parseInt(input);
@@ -73,7 +73,7 @@ public class Q3 {
 
     private void prepareAuction() throws IOException, SQLException {
 
-        System.out.print("Starting Bid: ");
+        System.out.print("\nStarting Bid: ");
         input = sc.nextLine();
         int startingBid = Integer.parseInt(input);
 
@@ -87,7 +87,7 @@ public class Q3 {
         System.out.print("End Date(yyyy-mm-dd): ");
         String endDate = sc.nextLine();
 
-        newAuction = new Auction(startingBid, acceptOffer, startDate, endDate, products.get(indexProduct).getId());
+        newAuction = new Auction(startingBid, acceptOffer, startDate, endDate, products.get(indexProduct-1).getId());
 
 
         addAuction();
@@ -111,7 +111,7 @@ public class Q3 {
             stm.setInt(2, newAuction.getAcceptOffer());
             stm.setString(3, newAuction.getStartDate());
             stm.setString(4, newAuction.getEndDate());
-            stm.setInt(5, products.get(indexProduct).getId());
+            stm.setInt(5, products.get(indexProduct-1).getId());
 
             int rows = stm.executeUpdate();
             if (rows == 1)
@@ -197,7 +197,7 @@ public class Q3 {
 
             stm = con.prepareStatement("SELECT * FROM Product WHERE SupplierID = ?");
 
-            stm.setInt(1, suppliers.get(indexSupplier).getId());
+            stm.setInt(1, suppliers.get(indexSupplier-1).getId());
 
             rs = stm.executeQuery();
 

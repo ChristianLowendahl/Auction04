@@ -17,11 +17,11 @@ public class Main  {
         Menu menu = new Menu();
         menu.welcome();
 
-        //Login database = new Login();
-        //database.login();
+        /*Login database = new Login();
+        database.login();
 
-        //UserVerifier verifier = new UserVerifier();
-        //verifier.run();
+        UserVerifier verifier = new UserVerifier();
+        verifier.run();*/
 
         // HEJ
 

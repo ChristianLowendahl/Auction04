@@ -42,7 +42,9 @@ CREATE TABLE Product(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(50),
   Description VARCHAR(200),
-  Provision INT
+  Provision INT,
+  SupplierID INT,
+  FOREIGN KEY (SupplierID) REFERENCES Supplier(ID)
 );
 
 CREATE TABLE Auction(

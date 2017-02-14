@@ -20,13 +20,13 @@ public class Q6 {
             con = database.conn;
 
             stm = con.createStatement();
-            stm.executeQuery("SELECT * FROM CustomerValue");
+            stm.executeQuery("SELECT * FROM CustomersValue");
             rs = stm.getResultSet();
 
             while(rs.next()) {
-                String firstName = rs.getString("Firstname");
-                String lastName = rs.getString("Lastname");
-                String totalvalue = rs.getString("TotalorderValue");
+                String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                String totalvalue = rs.getString("TotalValue");
                 System.out.println(firstName + lastName + totalvalue);
             }
         }catch (SQLException e){

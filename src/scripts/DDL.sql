@@ -9,23 +9,6 @@ CREATE TABLE User(
   Password VARCHAR(4)
 );
 
-INSERT INTO User (UserName, Email, Password) VALUES ('luiz', 'fourth@bid.com', '1234');
-INSERT INTO User (UserName, Email, Password) VALUES ('isa', 'fourth@bid.com', '1234');
-INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com', '1234');
-INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
-INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
-INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
-
-DELIMITER //
-CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
-  BEGIN
-
-    INSERT INTO User (UserName, Email, Password) VALUES (NewUserName, NewEmail , NewPassword);
-
-  END //
-
-DELIMITER ;
-
 
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -198,7 +181,22 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);
 
+INSERT INTO User (UserName, Email, Password) VALUES ('luiz', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('isa', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
 
+DELIMITER //
+CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
+  BEGIN
+
+    INSERT INTO User (UserName, Email, Password) VALUES (NewUserName, NewEmail , NewPassword);
+
+  END //
+
+DELIMITER ;
 
 
 DELIMITER //

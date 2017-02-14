@@ -39,7 +39,6 @@ public class Q3 {
 
             Login database = new Login();
             database.login();
-
             con = database.conn;
 
             stm = con.prepareStatement("{CALL AddAuction(?, ?, ?, ?, ?)}");

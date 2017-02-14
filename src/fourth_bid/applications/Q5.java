@@ -48,7 +48,5 @@ public class Q5 {
         }catch (SQLException e){
 
         }
-
     }
-
 }

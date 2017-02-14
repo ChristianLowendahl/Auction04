@@ -8,7 +8,9 @@ import java.util.Scanner;
 
 public class UserVerifier {
 
-    ArrayList<User> users = new ArrayList<>();
+    private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
+    int index;
 
     public void run() throws IOException, SQLException {
         userLogin();
@@ -24,21 +26,33 @@ public class UserVerifier {
         String password = sc.nextLine();
 
         for (User i : users){
-            if (i.getUserName().equals(userName) && i.getPassword().equals(password)){
-                System.out.println("Welcome to Fourth Bid!");
-
-                Loader loader = new Loader();
-                loader.loadAllData();
-
-                Menu menu = new Menu();
-                menu.welcome();
-            } else if (!i.getUserName().equals(userName) || !i.getPassword().equals(password)){
-                System.out.println("User not found!");
-                run();
-            }
+            userNames.add(i.getUserName());
         }
 
+        try {
+            index = userNames.indexOf(userName);
+        } catch (Exception e){
+            System.out.println("User not found!");
+            run();
+        }
+
+
+        if (users.get(index).getPassword().equals(password)){
+            System.out.println("Welcome to Fourth Bid!");
+
+            Loader loader = new Loader();
+            loader.loadAllData();
+
+            Menu menu = new Menu();
+            menu.welcome();
+
+        } else {
+            System.out.println("Wrong password!");
+            run();
+        }
     }
+
+
 
     public void loadUsers() throws IOException, SQLException {
 
@@ -55,8 +69,9 @@ public class UserVerifier {
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM User;");
 
-            while (rs.next())
+            while (rs.next()) {
                 users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

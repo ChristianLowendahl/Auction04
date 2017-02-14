@@ -33,8 +33,7 @@ public class Q3 {
         System.out.println("Start Date(yyyy-mm-dd):");
         String startDate = In.inText();
         System.out.println("End Date(yyyy-mm-dd):");
-        String endDate = In.inText()
-                ;
+        String endDate = In.inText();
 
         try{
 

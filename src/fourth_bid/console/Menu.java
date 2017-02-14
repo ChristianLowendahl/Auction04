@@ -25,7 +25,8 @@ public class Menu {
                     q2.addCustomer();
                     break;
                 case 3:
-                    System.exit(0);
+                    Q3 q3 = new Q3();
+                    q3.run();
                     break;
                 case 4:
                     Q4 q4 = new Q4();
@@ -41,6 +42,8 @@ public class Menu {
                     break;
                 case 7:
                     System.exit(0);
+                    Q7 q7 = new Q7();
+                    q7.totalComissionPerMonth();
                     break;
                 case 8:
                     System.exit(0);

@@ -5,8 +5,6 @@ import fourth_bid.applications.*;
 
 public class Menu {
 
-    CustomerHandler customerHandler = new CustomerHandler();
-
     public void welcome() throws java.io.IOException, SQLException {
 
         while (true) {
@@ -23,7 +21,6 @@ public class Menu {
                     q1.addSupplier();
                     break;
                 case 2:
-                    customerHandler.addCustomer();
                     break;
                 case 3:
                     System.exit(0);
@@ -33,10 +30,12 @@ public class Menu {
                     q4.run();
                     break;
                 case 5:
-                    System.exit(0);
+                    Q5 q5 = new Q5();
+                    q5.finishedAuctions();
                     break;
                 case 6:
-                    System.exit(0);
+                    Q6 q6 = new Q6();
+                    q6.listCustomerValue();
                     break;
                 case 7:
                     System.exit(0);
@@ -102,5 +101,4 @@ public class Menu {
         System.out.println("Write 'menu' for top menu.");
         System.out.print("Write here: ");
     }
-
 }

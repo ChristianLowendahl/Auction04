@@ -1,6 +1,7 @@
 package fourth_bid;
 
 import fourth_bid.console.Loader;
+import fourth_bid.console.Menu;
 
 import java.io.IOException;
 import java.sql.SQLException;

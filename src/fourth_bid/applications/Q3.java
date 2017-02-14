@@ -23,7 +23,6 @@ public class Q3 {
 
     public void addAuction(int productId) throws SQLException, IOException {
         PreparedStatement stm = null;
-        ResultSet rs = null;
         Connection con = null;
 
         System.out.println("Starting Bid: ");
@@ -57,9 +56,6 @@ public class Q3 {
         }catch(SQLException e){
             e.printStackTrace();
         }finally{
-            if(rs != null) {
-                rs.close();
-            }
             if(stm != null) {
                 stm.close();
             }

@@ -5,6 +5,8 @@ import fourth_bid.applications.*;
 
 public class Menu {
 
+    CustomerHandler customerHandler = new CustomerHandler();
+
     public void welcome() throws java.io.IOException, SQLException {
 
         while (true) {
@@ -21,7 +23,7 @@ public class Menu {
                     q1.addSupplier();
                     break;
                 case 2:
-                    System.exit(0);
+                    customerHandler.addCustomer();
                     break;
                 case 3:
                     System.exit(0);
@@ -53,7 +55,6 @@ public class Menu {
                     System.out.println("Invalid choice!");
             }
         }
-
     }
 
 

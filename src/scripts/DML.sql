@@ -76,7 +76,45 @@ GROUP BY Auction;
 
 -- 4.6	Skicka epost när auktion avslutas utan bud
 --  4.6.1	Skicka epost till Gunnar om en auktion avslutas utan något bud.
-SELECT * FROM AuctionHistory;
+
+DROP EVENT IF EXISTS Event_Finished_Auction;
+
+SET sql_mode = '';
+
+CREATE EVENT Event_Finished_Auction
+  ON SCHEDULE EVERY 1 DAY
+  STARTS '2017-01-01 00:00:00'
+DO
+  CALL Finish_Auctions();
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS Archive_Auctions //
+CREATE PROCEDURE Archive_Auctions()
+
+  BEGIN
+
+    INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, FinalOffer, StartDate, EndDate, ProductID, CustomerID)
+      SELECT Auction.ID, StartingBid, AcceptOffer, MAX(Bid.Price) AS FinalOffer, Startdate, Enddate, ProductID, Bid.CustomerID FROM Auction
+        INNER JOIN Bid ON Auction.ID = Bid.AuctionID
+      WHERE Auction.EndDate < CURRENT_DATE AND Bid.Price IS NOT NULL
+      GROUP BY ProductID, Bid.CustomerID;
+
+    /*
+    INSERT INTO FailedAuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID)
+    SELECT * FROM Auction
+    WHERE Auction.EndDate < CURRENT_DATE AND Bid.Price IS NULL;
+
+    DELETE FROM Auction WHERE Auction.ID IN (SELECT AuctionID FROM auction_history);
+
+    */
+
+  END//
+
+DELIMITER ;
+
+CALL Archive_Auctions();
 
 
 

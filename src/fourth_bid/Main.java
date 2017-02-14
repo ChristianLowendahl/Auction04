@@ -10,20 +10,9 @@ public class Main  {
     public static void main(String[] args) throws IOException, SQLException {
         System.out.println("Hello Fourth Bid!");
 
-        /*Loader loader = new Loader();
-        loader.loadAllData();
+        Program program = new Program();
+        program.start();
 
-
-        Menu menu = new Menu();
-        menu.welcome();*/
-
-        Login database = new Login();
-        database.login();
-
-        UserVerifier verifier = new UserVerifier();
-        verifier.run();
-
-        // HEJ
 
     }
 }

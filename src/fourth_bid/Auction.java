@@ -11,6 +11,14 @@ public class Auction {
     private int productID;
     private Product product;
 
+    public Auction(int startingBid, int acceptOffer, String startDate, String endDate, int productID) {
+        this.startingBid = startingBid;
+        this.acceptOffer = acceptOffer;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.productID = productID;
+    }
+
     public Auction(int id, int startingBid, int acceptOffer, String startDate, String endDate, int productID) {
         this.id = id;
         this.startingBid = startingBid;

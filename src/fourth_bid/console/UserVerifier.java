@@ -6,14 +6,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class UserVerifier {
+public class UserVerifier implements Runnable {
 
     private ArrayList<User> users = new ArrayList<>();
     private ArrayList<String> userNames = new ArrayList<>();
     int index;
 
-    public void run() throws IOException, SQLException {
-        userLogin();
+    @Override
+    public void run() {
+        try {
+            Thread.currentThread().setName("Start");
+
+            userLogin();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void userLogin() throws IOException, SQLException {
@@ -35,13 +44,11 @@ public class UserVerifier {
 
 
             if (users.get(index).getPassword().equals(password)){
-                System.out.println("Welcome to Fourth Bid!");
 
-                Loader loader = new Loader();
-                loader.loadAllData();
 
-                Menu menu = new Menu();
-                menu.welcome();
+                Program program = new Program();
+                program.run();
+
 
             } else {
                 System.out.println("Wrong password!");

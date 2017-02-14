@@ -1,51 +1,118 @@
 package fourth_bid.applications;
 
+
+import fourth_bid.Auction;
+import fourth_bid.Product;
+import fourth_bid.Supplier;
+import fourth_bid.console.In;
 import fourth_bid.console.Login;
 import fourth_bid.console.Menu;
-import fourth_bid.console.In;
+
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Q3 {
 
+    Scanner sc = new Scanner(System.in);
+    private String input;
+
+    private ArrayList<Supplier> suppliers = new ArrayList<>();
+    private ArrayList<Product> products = new ArrayList<>();
+
+    private int indexSupplier = 0;
+    private int indexProduct = 0;
+
+    private Auction newAuction;
+
     public void run() throws IOException, SQLException {
-        Menu menu = new Menu();
-        System.out.println("\nAdd auction\n");
-        loadSuppliers();
-        loadProducts(In.inText());
-        addAuction(In.inInt());
-        menu.goBackToMenu();
+        listSuppliers();
     }
 
-    public void addAuction(int productId) throws SQLException, IOException {
-        PreparedStatement stm = null;
+
+    private void listSuppliers() throws IOException, SQLException {
+
+        loadAllSuppliers();
+
+        System.out.println("\n***************************************\n");
+
+        int i = 0;
+        for (Supplier s : suppliers) {
+            i++;
+            System.out.println("[" + i + "]\t\t" + s.getName());
+        }
+
+        System.out.print("\nChoose a number between [1] and [" + suppliers.size() + "]\n" +
+                "to select a supplier: ");
+
+        input = sc.nextLine();
+        indexSupplier = Integer.parseInt(input);
+
+        listProductsBySupplier();
+    }
+
+    private void listProductsBySupplier() throws IOException, SQLException {
+
+        loadProductsBySupplier();
+
+        int j = 0;
+        for (Product p : products) {
+            j++;
+            System.out.println("[" + j + "]\t\t" + p.getName());
+        }
+
+        System.out.print("\nChoose a number between [1] and [" + products.size() + "]\n" +
+                "to select a product from supplier: " + suppliers.get(indexSupplier).getName() + ".");
+
+        input = sc.nextLine();
+        indexProduct = Integer.parseInt(input);
+
+        prepareAuction();
+
+    }
+
+    private void prepareAuction() throws IOException, SQLException {
+
+        System.out.print("Starting Bid: ");
+        input = sc.nextLine();
+        int startingBid = Integer.parseInt(input);
+
+        System.out.print("Accept Offer: ");
+        input = sc.nextLine();
+        int acceptOffer = Integer.parseInt(input);
+
+        System.out.print("Start Date(yyyy-mm-dd): ");
+        String startDate = sc.nextLine();
+
+        System.out.print("End Date(yyyy-mm-dd): ");
+        String endDate = sc.nextLine();
+
+        newAuction = new Auction(startingBid, acceptOffer, startDate, endDate, products.get(indexProduct).getId());
+
+
+        addAuction();
+
+    }
+
+    private void addAuction() throws IOException, SQLException {
         Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
 
-        System.out.println("Starting Bid: ");
-        int startingBid = In.inInt();
-        System.out.println("Accept Offer: ");
-        int acceptOffer = In.inInt();
-        System.out.println("Start Date(yyyy-mm-dd):");
-        String startDate = In.inText();
-        System.out.println("End Date(yyyy-mm-dd):");
-        String endDate = In.inText();
+        //
 
-        try{
-
+        try {
             Login database = new Login();
             database.login();
             con = database.conn;
 
             stm = con.prepareStatement("{CALL AddAuction(?, ?, ?, ?, ?)}");
-            stm.setInt(1,startingBid);
-            stm.setInt(2,acceptOffer);
-            stm.setString(3,startDate);
-            stm.setString(4,endDate);
-            stm.setInt(5,productId);
+            stm.setInt(1, newAuction.getStartingBid());
+            stm.setInt(2, newAuction.getAcceptOffer());
+            stm.setString(3, newAuction.getStartDate());
+            stm.setString(4, newAuction.getEndDate());
+            stm.setInt(5, products.get(indexProduct).getId());
 
             int rows = stm.executeUpdate();
             if (rows == 1)
@@ -53,97 +120,114 @@ public class Q3 {
             else
                 System.out.println("Auction not added!");
 
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(stm != null) {
-                stm.close();
-            }
-            if(con != null){
-                con.close();
-            }
+        }
+        finally {
+            if(rs != null)
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (stm != null)
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if( con != null)
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            Menu menu = new Menu();
+            menu.goBackToMenu();
         }
     }
 
-    public void loadSuppliers()throws SQLException{
+
+    private void loadAllSuppliers() throws IOException, SQLException {
+        Connection con = null;
         Statement stm = null;
         ResultSet rs = null;
-        Connection con = null;
 
-        try{
+        try {
             Login database = new Login();
             database.login();
             con = database.conn;
+
             stm = con.createStatement();
-            rs = stm.executeQuery("SELECT Name FROM supplier");
+            rs = stm.executeQuery("SELECT * FROM Supplier;");
 
-            System.out.println("Enter one of the available suppliers:");
+            while (rs.next())
 
-            int counter = 1;
-            while(rs.next()) {
+                suppliers.add(new Supplier(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 
-                String name = rs.getString("Name");
 
-                System.out.println(counter + ": " + name);
-                counter++;
-            }
-
-        }catch(SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(rs != null) {
-                rs.close();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (stm != null)
+                    stm.close();
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            if(stm != null) {
-                stm.close();
-            }
-            if(con != null){
-                con.close();
-            }
+
         }
+
     }
 
-    public void loadProducts(String input) throws SQLException {
+    private void loadProductsBySupplier() throws IOException, SQLException {
+        Connection con = null;
         PreparedStatement stm = null;
         ResultSet rs = null;
-        Connection con = null;
 
-        try{
-
+        try {
             Login database = new Login();
             database.login();
             con = database.conn;
 
-            stm = con.prepareStatement("select product.id, product.Name from product\n" +
-                    "inner join supplier on product.supplierID = supplier.id\n" +
-                    "where supplier.name LIKE (?)");
-            stm.setString(1, "%" + input + "%");
+            stm = con.prepareStatement("SELECT * FROM Product WHERE SupplierID = ?");
+
+            stm.setInt(1, suppliers.get(indexSupplier).getId());
+
             rs = stm.executeQuery();
 
-            System.out.println("Enter the ID of the product you would like to add to the auction:");
-
-            int counter = 1;
             while(rs.next()) {
+                int productId = rs.getInt("ID");
+                String productName = rs.getString("Name");
+                String productDescription = rs.getString("Description");
+                int provision = rs.getInt("Provision");
+                int supplierID = rs.getInt("SupplierID");
 
-                String id = rs.getString("ID");
-                String name = rs.getString("Name");
-
-                System.out.println("ID: " + id + " Name: " + name);
-                counter++;
+                products.add(new Product(productId, productName, productDescription, provision, supplierID));
             }
 
-        }catch(SQLException e){
+
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(rs != null) {
-                rs.close();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (stm != null)
+                    stm.close();
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            if(stm != null) {
-                stm.close();
-            }
-            if(con != null){
-                con.close();
-            }
+
         }
+
     }
 }

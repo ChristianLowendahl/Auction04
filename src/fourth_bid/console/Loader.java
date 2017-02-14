@@ -76,7 +76,7 @@ public class Loader {
 
 
             // SKAPA RELATIONER:
-            System.out.println("**********************");
+            //System.out.println("**********************");
 
             for (Customer i : customers){
                 //System.out.println(i);

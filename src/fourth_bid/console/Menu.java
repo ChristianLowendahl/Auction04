@@ -41,9 +41,8 @@ public class Menu {
                     q6.listCustomerValue();
                     break;
                 case 7:
-                    System.exit(0);
                     Q7 q7 = new Q7();
-                    q7.totalComissionPerMonth();
+                    q7.run();
                     break;
                 case 8:
                     System.exit(0);

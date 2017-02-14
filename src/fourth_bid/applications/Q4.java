@@ -1,10 +1,14 @@
-package fourth_bid.console;
+package fourth_bid.applications;
 
+
+import fourth_bid.console.In;
+import fourth_bid.console.Login;
+import fourth_bid.console.Menu;
 
 import java.io.IOException;
 import java.sql.*;
 
-public class BidHandler {
+public class Q4 {
 
     public void run() throws IOException, SQLException {
         subMenu();

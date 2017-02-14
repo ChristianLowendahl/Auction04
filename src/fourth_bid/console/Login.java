@@ -13,7 +13,7 @@ public class Login {
     private static String pass = "nack";
     private static String host = "localhost";
     private static String database = "Auction";
-    static Connection conn;
+    public static Connection conn;
 
 
     public void login() throws SQLException {

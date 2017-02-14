@@ -1,6 +1,4 @@
-import fourth_bid.console.Loader;
 import fourth_bid.console.Login;
-import fourth_bid.console.Menu;
 import fourth_bid.console.UserVerifier;
 
 import java.io.IOException;
@@ -15,7 +13,7 @@ public class Main  {
         database.login();
 
         UserVerifier verifier = new UserVerifier();
-        verifier.logging();
+        verifier.run();
 
         // HEJ
 

@@ -1,6 +1,7 @@
 package fourth_bid.console;
 
 import java.sql.SQLException;
+import fourth_bid.applications.*;
 
 public class Menu {
 
@@ -10,14 +11,14 @@ public class Menu {
 
             printTopMenu();
 
-            int tal = In.inInt();
-            switch (tal) {
+            int i = In.inInt();
+            switch (i) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    SupplierHandler handler = new SupplierHandler();
-                    handler.addSupplier();
+                    Q1 q1 = new Q1();
+                    q1.addSupplier();
                     break;
                 case 2:
                     System.exit(0);
@@ -26,8 +27,8 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 4:
-                    BidHandler bidHandler = new BidHandler();
-                    bidHandler.run();
+                    Q4 q4 = new Q4();
+                    q4.run();
                     break;
                 case 5:
                     System.exit(0);

@@ -10,14 +10,18 @@ public class UserVerifier {
 
     ArrayList<User> users = new ArrayList<>();
 
-    public void logging() throws IOException, SQLException {
-       loadUsers();
+    public void run() throws IOException, SQLException {
+        userLogin();
+    }
 
-    Scanner sc = new Scanner(System.in);
+    private void userLogin() throws IOException, SQLException {
+        loadUsers();
+
+        Scanner sc = new Scanner(System.in);
         System.out.print("Write your user name: ");
-    String userName = sc.nextLine();
+        String userName = sc.nextLine();
         System.out.print("Write your password: ");
-    String password = sc.nextLine();
+        String password = sc.nextLine();
 
         for (User i : users){
             if (i.getUserName().equals(userName) && i.getPassword().equals(password)){
@@ -28,8 +32,9 @@ public class UserVerifier {
 
                 Menu menu = new Menu();
                 menu.welcome();
-            } else {
+            } else if (!i.getUserName().equals(userName) || !i.getPassword().equals(password)){
                 System.out.println("User not found!");
+                run();
             }
         }
 

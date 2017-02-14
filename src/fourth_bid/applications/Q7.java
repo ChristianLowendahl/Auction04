@@ -29,7 +29,7 @@ public class Q7 {
 
             while (rs.next()) {
                 String month = rs.getString("Month");
-                String comission = rs.getString("TotalProvision");
+                String commission = rs.getString("TotalProvision");
 
                 switch(month) {
                     case "1":
@@ -70,7 +70,7 @@ public class Q7 {
                         break;
                 }
 
-                System.out.println("For " + month + " the total commission were: " + comission);
+                System.out.println("For " + month + " the total commission were: " + commission);
 
             }
         } catch (SQLException e) {

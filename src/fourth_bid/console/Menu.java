@@ -21,7 +21,8 @@ public class Menu {
                     q1.addSupplier();
                     break;
                 case 2:
-                    System.exit(0);
+                    Q2 q2 = new Q2();
+                    q2.addCustomer();
                     break;
                 case 3:
                     System.exit(0);
@@ -79,8 +80,8 @@ public class Menu {
     private void printTopMenu(){
 
         System.out.println("[0] To exit.");
-        System.out.println("[1] Add new supplier.");
-        System.out.println("[2] Question 2.");
+        System.out.println("[1] Add supplier.");
+        System.out.println("[2] Add customer.");
         System.out.println("[3] Question 3.");
         System.out.println("[4] List bids.");
         System.out.println("[5] Question 5.");

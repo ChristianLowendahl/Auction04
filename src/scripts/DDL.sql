@@ -146,7 +146,7 @@ INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-0
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-02', '11:00', 1050, 2, 1);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-05', '10:30', 1800, 3, 2);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-08', '14:15', 3000, 4, 2);
-INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-06', '03:40', 600, 5, 3);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-06', '03:40', 1000, 1, 3);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-07', '20:05', 800, 6, 3);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-08', '14:40', 700, 7, 4);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-10', '16:50', 950, 8, 5);
@@ -190,6 +190,8 @@ INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', 
 INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
 
+
+-- DML BOOT
 DELIMITER //
 CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
   BEGIN
@@ -200,7 +202,7 @@ CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassw
 
 DELIMITER ;
 
-
+-- DML BOOT
 DELIMITER //
 CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
   BEGIN
@@ -211,6 +213,7 @@ CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), Ne
 
 DELIMITER ;
 
+-- DML BOOT
 DELIMITER //
 CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
   BEGIN
@@ -220,6 +223,7 @@ CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate
 
 DELIMITER ;
 
+-- DML BOOT
 DELIMITER //
 CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
   BEGIN
@@ -228,8 +232,18 @@ CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdres
 
   END //
 
+-- DML BOOT
 DELIMITER ;
 
+CREATE VIEW AllBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID;
+
+-- DML BOOT
 CREATE VIEW HigherBid
 AS
   SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
@@ -239,10 +253,8 @@ AS
     INNER JOIN Product ON Product.ID = Auction.ProductID
   GROUP BY Auction.ID;
 
-CREATE VIEW AllBid
+-- DML BOOT
+CREATE VIEW CustomersValue
 AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
-  FROM Auction
-    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
-    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-    INNER JOIN Product ON Product.ID = Auction.ProductID;
+  SELECT FirstName, LastName, SUM(HigherBid) FROM HigherBid
+  GROUP BY FirstName;

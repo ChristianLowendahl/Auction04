@@ -21,6 +21,8 @@ public class Menu {
                     q1.addSupplier();
                     break;
                 case 2:
+                    Q2 q2 = new Q2();
+                    q2.addCustomer();
                     break;
                 case 3:
                     System.exit(0);

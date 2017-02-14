@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class Login {
 
     private static String user = "root";
-    private static String pass = "lpko";
+    private static String pass = "nack";
     private static String host = "localhost";
-    private static String database = "Auction04";
+    private static String database = "Auction";
     public static Connection conn;
 
     public void login() throws SQLException {

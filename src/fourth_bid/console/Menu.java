@@ -42,13 +42,7 @@ public class Menu {
                     break;
                 case 7:
                     Q7 q7 = new Q7();
-                    q7.run();
-                    break;
-                case 8:
-                    System.exit(0);
-                    break;
-                case 9:
-                    System.exit(0);
+                    q7.totalComissionPerMonth();
                     break;
                 case 10:
                     UserVerifier verifier = new UserVerifier();
@@ -59,7 +53,6 @@ public class Menu {
             }
         }
     }
-
 
     public void goBackToMenu() throws java.io.IOException, SQLException {
         while (true) {
@@ -84,16 +77,13 @@ public class Menu {
 
         System.out.println("[0] To exit.");
         System.out.println("[1] Add new supplier.");
-        System.out.println("[2] Question 2.");
-        System.out.println("[3] Question 3.");
+        System.out.println("[2] Add new customer.");
+        System.out.println("[3] Add suppliers auction.");
         System.out.println("[4] List bids.");
-        System.out.println("[5] Question 5.");
-        System.out.println("[6] Question 6.");
-        System.out.println("[7] Question 7.");
-        System.out.println("[8] Question 8.");
-        System.out.println("[9] Question 9.");
+        System.out.println("[5] Chose auctions by date.");
+        System.out.println("[6] Active customers.");
+        System.out.println("[7] Commissions per month.");
         System.out.println("[10] Add new user.");
-
 
         System.out.print("\nChoose a [number]: ");
     }

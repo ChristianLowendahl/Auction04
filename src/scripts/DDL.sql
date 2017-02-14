@@ -37,6 +37,16 @@ CREATE TABLE Customer(
   City VARCHAR(50)
 );
 
+DELIMITER //
+CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), NewPhone CHAR(15), NewEmail VARCHAR(50), NewAddress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES (NewFirstName, NewLastName, NewPhone, NewEmail, NewAddress, NewCity);
+
+  END //
+
+DELIMITER ;
+
 CREATE TABLE Supplier(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(50),
@@ -187,6 +197,8 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (13, 4000, '2017-01-10', '16:55', 5, 2);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);
+
+
 
 
 DELIMITER //

@@ -1,6 +1,7 @@
 package fourth_bid.console;
 
 import java.sql.SQLException;
+import fourth_bid.applications.*;
 
 public class Menu {
 
@@ -10,14 +11,14 @@ public class Menu {
 
             printTopMenu();
 
-            int tal = In.inInt();
-            switch (tal) {
+            int i = In.inInt();
+            switch (i) {
                 case 0:
                     System.exit(0);
                     break;
                 case 1:
-                    SupplierHandler handler = new SupplierHandler();
-                    handler.addSupplier();
+                    Q1 q1 = new Q1();
+                    q1.addSupplier();
                     break;
                 case 2:
                     System.exit(0);
@@ -26,7 +27,8 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 4:
-                    System.exit(0);
+                    Q4 q4 = new Q4();
+                    q4.run();
                     break;
                 case 5:
                     System.exit(0);
@@ -44,10 +46,11 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 10:
-                    System.exit(0);
+                    UserVerifier verifier = new UserVerifier();
+                    verifier.addUser();
                     break;
                 default:
-                    System.out.println("Felaktigt menyval");
+                    System.out.println("Invalid choice!");
             }
         }
 
@@ -61,36 +64,42 @@ public class Menu {
 
             String  str = In.inText();
             switch (str) {
-                case "avsluta":
+                case "exit":
                     System.exit(0);
                     break;
                 case "menu":
                     welcome();
                     break;
                 default:
-                    System.out.println("Felaktigt menyval");
+                    System.out.println("Invalid command!");
             }
         }
     }
 
     private void printTopMenu(){
 
-        System.out.println("[1] Add new supplier.\t\t\t\t[7] fråga 1.");
-        System.out.println("[2] fråga 2.\t\t\t\t[8] fråga 2.");
-        System.out.println("[3] fråga 3.\t\t\t\t[9] fråga 3.");
-        System.out.println("[4] fråga 4.\t\t\t\t[10] fråga 4.");
-        System.out.println("[5] fråga 5.");
-        System.out.println("[6] fråga 6.\t\t\t\t[0] Avsluta programmet.");
+        System.out.println("[0] To exit.");
+        System.out.println("[1] Add new supplier.");
+        System.out.println("[2] Question 2.");
+        System.out.println("[3] Question 3.");
+        System.out.println("[4] List bids.");
+        System.out.println("[5] Question 5.");
+        System.out.println("[6] Question 6.");
+        System.out.println("[7] Question 7.");
+        System.out.println("[8] Question 8.");
+        System.out.println("[9] Question 9.");
+        System.out.println("[10] Add new user.");
 
-        System.out.print("\nVälj ett [tal]: ");
+
+        System.out.print("\nChoose a [number]: ");
     }
 
     private void printGoBackMenu(){
         System.out.println("\n***************************************\n");
 
-        System.out.println("Skriv 'avsluta' för avsluta programmet.");
-        System.out.println("Skriv 'menu' för top menu.");
-        System.out.print("Skriv här: ");
+        System.out.println("Write 'exit' to finish.");
+        System.out.println("Write 'menu' for top menu.");
+        System.out.print("Write here: ");
     }
 
 }

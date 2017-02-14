@@ -2,6 +2,31 @@ DROP DATABASE IF EXISTS Auction04;
 CREATE DATABASE Auction04;
 Use Auction04;
 
+CREATE TABLE User(
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  UserName VARCHAR(50),
+  Email VARCHAR(50),
+  Password VARCHAR(4)
+);
+
+INSERT INTO User (UserName, Email, Password) VALUES ('luiz', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('isa', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
+INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
+
+DELIMITER //
+CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
+  BEGIN
+
+    INSERT INTO User (UserName, Email, Password) VALUES (NewUserName, NewEmail , NewPassword);
+
+  END //
+
+DELIMITER ;
+
+
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   FirstName VARCHAR(50),
@@ -162,3 +187,50 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (13, 4000, '2017-01-10', '16:55', 5, 2);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);
+
+
+DELIMITER //
+CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
+  BEGIN
+
+    INSERT INTO Product (Name, Description, Provision) VALUES (NewName, NewDescription , NewProvision);
+
+  END //
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
+  BEGIN
+
+    INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);
+  END //
+
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
+
+  END //
+
+DELIMITER ;
+
+CREATE VIEW HigherBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
+  GROUP BY Auction.ID;
+
+CREATE VIEW AllBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID;

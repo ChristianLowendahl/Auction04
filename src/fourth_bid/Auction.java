@@ -79,4 +79,8 @@ public class Auction {
     public void setProductID(int productID) {
         this.productID = productID;
     }
+
+    public String toString(){
+        return "Auction: " + this.id + ".";
+    }
 }

@@ -17,14 +17,14 @@ public class In{
 
     public static int inInt() throws IOException { // Int inmatning
         String inStr;
-        int heltal = 0;
+        int i = 0;
         inStr = inText();
         try {
-            heltal = Integer.parseInt(inStr);
+            i = Integer.parseInt(inStr);
         } catch (NumberFormatException nfe) {
             System.err.println("Invalid Format!");
         }
-        return heltal;
+        return i;
     }
 }
 

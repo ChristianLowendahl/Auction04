@@ -126,4 +126,8 @@ public class AuctionHistory {
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
+
+    public String toString(){
+        return "AuctionHistory: " + this.auctionID + ".";
+    }
 }

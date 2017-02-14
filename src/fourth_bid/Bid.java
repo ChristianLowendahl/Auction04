@@ -101,4 +101,8 @@ public class Bid {
     public void setAuctionID(int auctionID) {
         this.auctionID = auctionID;
     }
+
+    public String toString(){
+        return "Bid: " + this.id + ".";
+    }
 }

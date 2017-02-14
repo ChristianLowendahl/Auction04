@@ -1,4 +1,7 @@
-package fourth_bid.console;
+package fourth_bid.applications;
+
+import fourth_bid.console.Login;
+import fourth_bid.console.Menu;
 
 import java.io.IOException;
 import java.sql.*;
@@ -6,7 +9,7 @@ import java.util.Scanner;
 
 //------------  Lägga in en ny leverantör  -------------------
 
-public class SupplierHandler {
+public class Q1 {
 
     public void addSupplier() throws IOException, SQLException {
         Connection con = null;
@@ -25,9 +28,12 @@ public class SupplierHandler {
 
         try {
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Auction?useSSL=false","root", "nack");
+            Login database = new Login();
+            database.login();
 
-            stm = con.prepareStatement("INSERT INTO Supplier VALUES(?, ?, ?, ?)");
+            con = database.conn;
+
+            stm = con.prepareStatement("{CALL AddSupplier(?, ?, ?, ?)}");
             stm.setString(1, name);
             stm.setString(2, email);
             stm.setString(3, address);

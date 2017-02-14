@@ -79,36 +79,36 @@ public class Loader {
             System.out.println("**********************");
 
             for (Customer i : customers){
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (Supplier i : suppliers){
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (Product i : products){
                 i.setRelation(suppliers);
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (Auction i : auctions){
                 i.setRelation(products);
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (Bid i : bids){
                 i.setRelation(auctions, customers);
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (AuctionHistory i : auctionHistories){
                 i.setRelation(auctions, products, customers);
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             for (BiddingHistory i : biddingHistories){
                 i.setRelation(bids, auctionHistories, customers);
-                System.out.println(i);
+                //System.out.println(i);
             }
 
             System.out.println("**********************");

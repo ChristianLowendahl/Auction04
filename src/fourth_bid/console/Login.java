@@ -6,19 +6,20 @@ import java.sql.SQLException;
 
 public class Login {
 
-    private static String user = "root";
-    private static String pass = "nack";
-    private static String host = "localhost";
-    private static String database = "Auction";
-    public static Connection conn;
+    public  Connection conn;
 
     public void login() throws SQLException {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.out.println("Could not load the driver");
+            System.out.println("Could not load the driver!");
         }
+
+        String user = "root";
+        String pass = "nack";
+        String host = "localhost";
+        String database = "Auction";
 
          conn = DriverManager.getConnection
                 ("jdbc:mysql://" + host + ":3306/" + database +"?useSSL=false", user, pass);

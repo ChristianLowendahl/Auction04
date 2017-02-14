@@ -253,15 +253,13 @@ AS
     INNER JOIN Bid ON Bid.AuctionID = Auction.ID
     INNER JOIN Customer ON Customer.ID = Bid.CustomerID
     INNER JOIN Product ON Product.ID = Auction.ProductID
-  GROUP BY Auction.ID, FirstName, LastName;
+  GROUP BY Auction.ID;
 
 -- DML BOOT
-DROP VIEW IF EXISTS CustomersValue;
-
 CREATE VIEW CustomersValue
 AS
-  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
-  GROUP BY FirstName, LastName;
+  SELECT FirstName, LastName, SUM(HigherBid) AS TotalValue FROM HigherBid
+  GROUP BY FirstName;
 
 -- DML BOOT
 CREATE VIEW TotalCommissionPerMonth
@@ -269,5 +267,4 @@ AS
   SELECT MONTH(Auction.EndDate) AS Month, SUM(Product.Provision) AS TotalProvision FROM Auction
     INNER JOIN Product ON Auction.ProductID = Product.ID
   GROUP BY MONTH(Auction.EndDate);
-
 

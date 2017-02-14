@@ -16,6 +16,16 @@ INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', 
 INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
 
+DELIMITER //
+CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
+  BEGIN
+
+    INSERT INTO User (UserName, Email, Password) VALUES (NewUserName, NewEmail , NewPassword);
+
+  END //
+
+DELIMITER ;
+
 
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -180,7 +190,7 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, Cu
 
 
 DELIMITER //
-CREATE PROCEDURE RegistreProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
+CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
   BEGIN
 
     INSERT INTO Product (Name, Description, Provision) VALUES (NewName, NewDescription , NewProvision);
@@ -190,7 +200,7 @@ CREATE PROCEDURE RegistreProduct(NewName VARCHAR(50), NewDescription VARCHAR(200
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE RegistreAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
+CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
   BEGIN
 
     INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);

@@ -73,4 +73,64 @@ public class UserVerifier {
             }
         }
     }
+
+    public void addUser() throws IOException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Write user's name: ");
+        String userName = sc.nextLine();
+        System.out.print("Write user's email: ");
+        String userEmail = sc.nextLine();
+        System.out.print("Write a password (4 characters): ");
+        String password = sc.nextLine();
+
+        try {
+
+            Login database = new Login();
+            database.login();
+
+            con = database.conn;
+
+            stm = con.prepareStatement("{CALL AddUser(?, ?, ?)}");
+            stm.setString(1, userName);
+            stm.setString(2, userEmail);
+            stm.setString(3, password);
+
+            int rows = stm.executeUpdate();
+            if (rows == 1)
+                System.out.println("User successfully added!");
+            else
+                System.out.println("User not added!");
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            if(rs != null)
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if (stm != null)
+                try {
+                    stm.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            if( con != null)
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+            Menu menu = new Menu();
+            menu.goBackToMenu();
+        }
+    }
 }

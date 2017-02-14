@@ -46,7 +46,8 @@ public class Menu {
                     System.exit(0);
                     break;
                 case 10:
-                    System.exit(0);
+                    UserVerifier verifier = new UserVerifier();
+                    verifier.addUser();
                     break;
                 default:
                     System.out.println("Invalid choice!");
@@ -87,7 +88,7 @@ public class Menu {
         System.out.println("[7] Question 7.");
         System.out.println("[8] Question 8.");
         System.out.println("[9] Question 9.");
-        System.out.println("[10] Question 10.");
+        System.out.println("[10] Add new user.");
 
 
         System.out.print("\nChoose a [number]: ");

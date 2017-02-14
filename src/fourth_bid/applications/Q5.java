@@ -27,7 +27,7 @@ public class Q5 {
 
             stm = con.prepareStatement("SELECT Auction.ID, Auction.StartDate, Auction.EndDate, Product.Name, Product.Provision " +
                     "FROM Auction INNER JOIN Product ON Auction.ProductID = Product.ID " +
-                    "WHERE StartDate > ? AND EndDate < ?");
+                    "WHERE StartDate >= ? AND EndDate <= ?");
 
             stm.setString(1, startDate);
             stm.setString(2, endDate);
@@ -40,8 +40,8 @@ public class Q5 {
                 String productName = rs.getString("Name");
                 String provision = rs.getString("Provision");
 
-                System.out.println("ID: " + id + " Start Date: " + sDate + " End Date: " + eDate +
-                        " Product: " + productName + " Commission " + provision);
+                System.out.println("ID: " + id + "\tStart Date: " + sDate + "\tEnd Date: " + eDate +
+                        "\tProduct: " + productName + "\tCommission " + provision);
 
             }
 

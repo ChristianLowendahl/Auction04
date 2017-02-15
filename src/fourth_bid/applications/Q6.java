@@ -29,7 +29,7 @@ public class Q6 {
                 String lastName = rs.getString("LastName");
                 String totalvalue = rs.getString("TotalOrderValue");
 
-                System.out.println("Customer: " + firstName + " " + lastName + "\tTotal value: " + totalvalue);
+                System.out.println("Customer: " + firstName + " " + lastName + "\nTotal value: " + totalvalue + "\n");
             }
 
         }catch (SQLException e){

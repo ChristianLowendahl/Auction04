@@ -22,15 +22,6 @@ CREATE TABLE Customer(
   City VARCHAR(50)
 );
 
-DELIMITER //
-CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), NewPhone CHAR(15), NewEmail VARCHAR(50), NewAddress VARCHAR(50), NewCity VARCHAR(50))
-  BEGIN
-
-    INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES (NewFirstName, NewLastName, NewPhone, NewEmail, NewAddress, NewCity);
-
-  END //
-
-DELIMITER ;
 
 CREATE TABLE Supplier(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,15 +35,15 @@ CREATE TABLE Product(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(50),
   Description VARCHAR(200),
-  Provision INT,
+  Provision DOUBLE,
   SupplierID INT,
   FOREIGN KEY (SupplierID) REFERENCES Supplier(ID)
 );
 
 CREATE TABLE Auction(
   ID Int AUTO_INCREMENT PRIMARY KEY,
-  StartingBid INT,
-  AcceptOffer INT,
+  StartingBid DOUBLE,
+  AcceptOffer DOUBLE,
   StartDate DATE,
   EndDate DATE,
   ProductID INT,
@@ -63,7 +54,7 @@ CREATE TABLE Bid(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   BidDate DATE,
   BidTime TIME,
-  Price INT,
+  Price DOUBLE,
   CustomerID INT,
   AuctionID INT,
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID),
@@ -72,8 +63,8 @@ CREATE TABLE Bid(
 
 CREATE TABLE AuctionHistory(
   AuctionID INT PRIMARY KEY,
-  StartingBid INT,
-  AcceptOffer INT,
+  StartingBid DOUBLE,
+  AcceptOffer DOUBLE,
   StartDate DATE,
   EndDate DATE,
   ProductID INT,
@@ -84,7 +75,7 @@ CREATE TABLE AuctionHistory(
 
 CREATE TABLE BiddingHistory(
   BidID INT PRIMARY KEY,
-  Price INT,
+  Price DOUBLE,
   BidDate DATE,
   BidTime TIME,
   AuctionHistoryID INT,
@@ -95,8 +86,8 @@ CREATE TABLE BiddingHistory(
 
 CREATE TABLE FailedAuctionHistory (
   AuctionID   INT PRIMARY KEY,
-  StartingBid INT,
-  AcceptOffer INT,
+  StartingBid DOUBLE,
+  AcceptOffer DOUBLE,
   StartDate   DATE,
   EndDate     DATE,
   ProductID   INT,
@@ -121,21 +112,21 @@ INSERT INTO Supplier (Name, Email, Address, City) VALUES ('History Dealers','hd@
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Antique Shoppers','antiqueshoppers@mail.com','Bromsens klippa 4','Västerås');
 INSERT INTO Supplier (Name, Email, Address, City) VALUES ('Perfect Finds','perfectfinds@mail.com','Klingens väg 67','Göteborg');
 
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 10, 1); -- 500, 1000, 1050
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 30, 2); -- 1500, 2500, 3000
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 8, 3); -- 400, 800, 800
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 7, 4); -- 400, 800, 700
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 9, 5); -- 800, 1700, 950
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Pälsjacka', 'Mink från 1960/70-tal.', 10, 6);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Portfölj', 'Läder portfölj från 1900-talet', 10, 1);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin vaser', 'Ett par porslin och silver vaser från England', 10, 2);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ljusplåtar', 'ett par ljusplåtar av mässing från 1900-tal.', 10, 3);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kaffeservis', '37 delar kaffeservis, Rörstrand från 1900-talets mitt', 10, 4);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kalle Anka serietidningar', '2 st, nr. 1 januari 1951 och 1952', 10, 5);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ånglok', 'MÄRKLIN ånglok SK800 med tender', 10, 6);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Blunddocka', 'porslinshuvud, armar och ben från 1900-talets första kvartal', 10, 1);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Jordglob', 'Jordglob av glas från 1900-talets andra hälft', 10, 2);
-INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Tavla', 'Skogsmotiv, olja på duk, signerad', 10, 3);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antika örhängen', 'Antika örhängen i silver med dekor av 18k guld', 0.1, 1); -- 500, 1000, 1050
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Vitrinskåp', 'Rokokostil vitrnskåp mahogny från 1900-tal', 0.1, 2); -- 1500, 2500, 3000
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin bordsur', 'Antik bordsur från Tyskland från 1900-talet', 0.1, 3); -- 400, 800, 800
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Antik klocka', 'Antika klocka från 1900-talet', 0.1, 4); -- 400, 800, 700
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Oljemålning', 'Figurkomposition, olja på duk, signerad', 0.1, 5); -- 800, 1700, 950
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Pälsjacka', 'Mink från 1960/70-tal.', 0.1, 6);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Portfölj', 'Läder portfölj från 1900-talet', 0.1, 1);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Porslin vaser', 'Ett par porslin och silver vaser från England', 0.1, 2);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ljusplåtar', 'ett par ljusplåtar av mässing från 1900-tal.', 0.1, 3);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kaffeservis', '37 delar kaffeservis, Rörstrand från 1900-talets mitt', 0.1, 4);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Kalle Anka serietidningar', '2 st, nr. 1 januari 1951 och 1952', 0.1, 5);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Ånglok', 'MÄRKLIN ånglok SK800 med tender', 0.1, 6);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Blunddocka', 'porslinshuvud, armar och ben från 1900-talets första kvartal', 0.1, 1);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Jordglob', 'Jordglob av glas från 1900-talets andra hälft', 0.1, 2);
+INSERT INTO Product (Name, Description, Provision, SupplierID) VALUES ('Tavla', 'Skogsmotiv, olja på duk, signerad', 0.1, 3);
 
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (700, 1050,'2017-01-01','2017-01-04',1);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (1500, 3000,'2017-01-05','2017-01-08',2);
@@ -191,6 +182,18 @@ INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com'
 INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
+
+
+-- DML BOOT
+DELIMITER //
+CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), NewPhone CHAR(15), NewEmail VARCHAR(50), NewAddress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES (NewFirstName, NewLastName, NewPhone, NewEmail, NewAddress, NewCity);
+
+  END //
+
+DELIMITER ;
 
 
 -- DML BOOT
@@ -266,12 +269,14 @@ AS
   SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
   GROUP BY FirstName;
 
+
 -- DML BOOT
 DROP VIEW IF EXISTS TotalCommissionPerMonth;
 CREATE VIEW TotalCommissionPerMonth
 AS
-  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid) AS TotalCommission FROM HigherBid
+  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid)*Product.Provision AS TotalCommission FROM HigherBid
     INNER JOIN Auction ON  Auction.ID = HigherBid.ID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
   WHERE YEAR(Auction.EndDate) = (SELECT MAX(YEAR(Auction.EndDate))  FROM Auction)
   GROUP BY MONTHNAME(Auction.EndDate)
   ORDER BY TotalCommission DESC;

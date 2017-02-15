@@ -29,46 +29,7 @@ public class Q7 {
 
             while (rs.next()) {
                 String month = rs.getString("Month");
-                String commission = rs.getString("TotalProvision");
-
-                switch(month) {
-                    case "1":
-                        month = "January";
-                        break;
-                    case "2":
-                        month = "Febuary";
-                        break;
-                    case "3":
-                        month = "March";
-                        break;
-                    case "4":
-                        month = "April";
-                        break;
-                    case "5":
-                        month = "May";
-                        break;
-                    case "6":
-                        month = "June";
-                        break;
-                    case "7":
-                        month = "July";
-                        break;
-                    case "8":
-                        month = "August";
-                        break;
-                    case "9":
-                        month = "September";
-                        break;
-                    case "10":
-                        month = "October";
-                        break;
-                    case "11":
-                        month = "November";
-                        break;
-                    case "12":
-                        month = "December";
-                        break;
-                }
+                String commission = rs.getString("TotalCommission");
 
                 System.out.println("For " + month + " the total commission were: " + commission);
 

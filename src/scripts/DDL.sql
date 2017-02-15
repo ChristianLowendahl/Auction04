@@ -270,3 +270,27 @@ AS
     INNER JOIN Product ON Auction.ProductID = Product.ID
   GROUP BY MONTH(Auction.EndDate);
 
+-- DML BOOT
+DELIMITER //
+
+
+CREATE PROCEDURE Archive_Auctions()
+
+  BEGIN
+
+    INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, FinalOffer, StartDate, EndDate, ProductID, CustomerID)
+      SELECT Auction.ID, StartingBid, AcceptOffer, MAX(Bid.Price) AS FinalOffer, Startdate, Enddate, ProductID, Bid.CustomerID FROM Auction
+        INNER JOIN Bid ON Auction.ID = Bid.AuctionID
+      WHERE Auction.EndDate < CURRENT_DATE AND Bid.Price IS NOT NULL
+      GROUP BY ProductID, Bid.CustomerID;
+
+
+  END//
+
+DELIMITER ;
+
+CREATE EVENT Event_Finished_Auction
+  ON SCHEDULE EVERY 1 DAY
+  STARTS '2017-01-01 00:00:00'
+DO
+  CALL Archive_Auctions();

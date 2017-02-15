@@ -266,18 +266,19 @@ AS
   SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
   GROUP BY FirstName;
 
-
 -- DML BOOT
 DROP VIEW IF EXISTS TotalCommissionPerMonth;
 CREATE VIEW TotalCommissionPerMonth
 AS
-  SELECT MONTH(Auction.EndDate) AS Month, SUM(Product.Provision) AS TotalProvision FROM Auction
-    INNER JOIN Product ON Auction.ProductID = Product.ID
-  GROUP BY MONTH(Auction.EndDate);
+  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid) AS TotalCommission FROM HigherBid
+    INNER JOIN Auction ON  Auction.ID = HigherBid.ID
+  WHERE YEAR(Auction.EndDate) = (SELECT MAX(YEAR(Auction.EndDate))  FROM Auction)
+  GROUP BY MONTHNAME(Auction.EndDate)
+  ORDER BY TotalCommission DESC;
+
 
 -- DML BOOT
 DELIMITER //
-
 
 CREATE PROCEDURE Archive_Auctions()
 

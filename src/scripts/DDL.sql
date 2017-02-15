@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Auction04;
-CREATE DATABASE Auction04;
-Use Auction04;
+DROP DATABASE IF EXISTS Auction;
+CREATE DATABASE Auction;
+Use Auction;
 
 SET sql_mode = '';
 
@@ -245,8 +245,19 @@ AS
     INNER JOIN Customer ON Customer.ID = Bid.CustomerID
     INNER JOIN Product ON Product.ID = Auction.ProductID;
 
+
 -- DML BOOT
 CREATE VIEW HigherBid
+AS
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
+  GROUP BY Auction.ID;
+
+-- DML BOOT
+CREATE VIEW HigherBidAN
 AS
   SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
   FROM Auction
@@ -256,11 +267,9 @@ AS
   GROUP BY Auction.ID, FirstName, LastName;
 
 -- DML BOOT
-DROP VIEW IF EXISTS CustomersValue;
-
 CREATE VIEW CustomersValue
 AS
-  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
+  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBidAN
   GROUP BY FirstName, LastName;
 
 -- DML BOOT
@@ -294,3 +303,5 @@ CREATE EVENT Event_Finished_Auction
   STARTS '2017-01-01 00:00:00'
 DO
   CALL Archive_Auctions();
+
+

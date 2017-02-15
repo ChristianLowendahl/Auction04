@@ -1,9 +1,9 @@
 package fourth_bid.applications;
 
 
-import fourth_bid.Auction;
-import fourth_bid.Product;
-import fourth_bid.Supplier;
+import fourth_bid.models.Auction;
+import fourth_bid.models.Product;
+import fourth_bid.models.Supplier;
 import fourth_bid.console.Login;
 import fourth_bid.console.Menu;
 

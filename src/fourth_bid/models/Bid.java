@@ -1,4 +1,4 @@
-package fourth_bid;
+package fourth_bid.models;
 
 import java.util.ArrayList;
 

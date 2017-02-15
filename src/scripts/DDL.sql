@@ -248,7 +248,7 @@ AS
     INNER JOIN Product ON Product.ID = Auction.ProductID;
 
 
--- DML BOOT DET HÄR SKA VARA SOM DET ÄR!
+-- DML BOOT
 DROP VIEW IF EXISTS HigherBid;
 CREATE VIEW HigherBid
 AS
@@ -260,22 +260,12 @@ AS
   GROUP BY Auction.ID;
 
 -- DML BOOT
-DROP VIEW IF EXISTS HigherBidAN;
-CREATE VIEW HigherBidAN
-AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
-  FROM Auction
-    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
-    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-    INNER JOIN Product ON Product.ID = Auction.ProductID
-  GROUP BY Auction.ID, FirstName, LastName;
-
--- DML BOOT
 DROP VIEW IF EXISTS CustomersValue;
 CREATE VIEW CustomersValue
 AS
-  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBidAN
+  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
   GROUP BY FirstName, LastName;
+
 
 -- DML BOOT
 DROP VIEW IF EXISTS TotalCommissionPerMonth;
@@ -309,4 +299,5 @@ CREATE EVENT Event_Finished_Auction
   STARTS '2017-01-01 00:00:00'
 DO
   CALL Archive_Auctions();
+
 

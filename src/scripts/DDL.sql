@@ -264,7 +264,7 @@ DROP VIEW IF EXISTS CustomersValue;
 CREATE VIEW CustomersValue
 AS
   SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
-  GROUP BY FirstName, LastName;
+  GROUP BY ID;
 
 
 -- DML BOOT

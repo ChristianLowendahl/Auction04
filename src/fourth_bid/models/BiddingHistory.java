@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class BiddingHistory {
 
     private int bidID;
-    private int price;
+    private double price;
     private String bidDate;
     private String bidTime;
     private int auctionHistoryID;
@@ -15,7 +15,7 @@ public class BiddingHistory {
     private AuctionHistory auctionHistory;
     private Customer customer;
 
-    public BiddingHistory(int bidID, int price, String bidDate, String bidTime, int auctionHistoryID, int customerID) {
+    public BiddingHistory(int bidID, double price, String bidDate, String bidTime, int auctionHistoryID, int customerID) {
         this.bidID = bidID;
         this.price = price;
         this.bidDate = bidDate;
@@ -76,11 +76,11 @@ public class BiddingHistory {
         this.bidID = bidID;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

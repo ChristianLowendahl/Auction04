@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Auction {
     private int id;
-    private int startingBid;
-    private int acceptOffer;
+    private double startingBid;
+    private double acceptOffer;
     private String startDate;
     private String endDate;
     private int productID;
@@ -48,7 +48,7 @@ public class Auction {
         this.id = id;
     }
 
-    public int getStartingBid() {
+    public double getStartingBid() {
         return startingBid;
     }
 
@@ -56,7 +56,7 @@ public class Auction {
         this.startingBid = startingBid;
     }
 
-    public int getAcceptOffer() {
+    public double getAcceptOffer() {
         return acceptOffer;
     }
 

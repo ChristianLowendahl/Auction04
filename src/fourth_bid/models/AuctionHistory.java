@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class AuctionHistory {
 
     private int auctionID;
-    private String startingBid;
-    private int acceptOffer;
+    private double startingBid;
+    private double acceptOffer;
     private String startDate;
     private String endDate;
     private int productID;
@@ -17,7 +17,7 @@ public class AuctionHistory {
     private Customer customer;
 
 
-    public AuctionHistory(int auctionID, String startingBid, int acceptOffer, String startDate, String endDate, int productID, int customerID) {
+    public AuctionHistory(int auctionID, double startingBid, double acceptOffer, String startDate, String endDate, int productID, int customerID) {
         this.auctionID = auctionID;
         this.startingBid = startingBid;
         this.acceptOffer = acceptOffer;
@@ -79,15 +79,15 @@ public class AuctionHistory {
         this.auctionID = auctionID;
     }
 
-    public String getStartingBid() {
+    public double getStartingBid() {
         return startingBid;
     }
 
-    public void setStartingBid(String startingBid) {
+    public void setStartingBid(double startingBid) {
         this.startingBid = startingBid;
     }
 
-    public int getAcceptOffer() {
+    public double getAcceptOffer() {
         return acceptOffer;
     }
 

@@ -107,8 +107,8 @@ public class Q3 {
             con = database.conn;
 
             stm = con.prepareStatement("{CALL AddAuction(?, ?, ?, ?, ?)}");
-            stm.setInt(1, newAuction.getStartingBid());
-            stm.setInt(2, newAuction.getAcceptOffer());
+            stm.setDouble(1, newAuction.getStartingBid());
+            stm.setDouble(2, newAuction.getAcceptOffer());
             stm.setString(3, newAuction.getStartDate());
             stm.setString(4, newAuction.getEndDate());
             stm.setInt(5, products.get(indexProduct-1).getId());

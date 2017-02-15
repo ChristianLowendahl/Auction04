@@ -60,13 +60,13 @@ public class Loader {
             rs = stm.executeQuery("SELECT * FROM Bid;");
 
             while (rs.next())
-                bids.add(new Bid(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
+                bids.add(new Bid(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6)));
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM AuctionHistory;");
 
             while (rs.next())
-                auctionHistories.add(new AuctionHistory(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
+                auctionHistories.add(new AuctionHistory(rs.getInt(1), rs.getDouble(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
 
             stm = con.createStatement();
             rs = stm.executeQuery("SELECT * FROM BiddingHistory;");

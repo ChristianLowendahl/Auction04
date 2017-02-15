@@ -248,7 +248,7 @@ AS
     INNER JOIN Product ON Product.ID = Auction.ProductID;
 
 
--- DML BOOT
+-- DML BOOT DET HÄR SKA VARA SOM DET ÄR!
 DROP VIEW IF EXISTS HigherBid;
 CREATE VIEW HigherBid
 AS
@@ -309,5 +309,4 @@ CREATE EVENT Event_Finished_Auction
   STARTS '2017-01-01 00:00:00'
 DO
   CALL Archive_Auctions();
-
 

@@ -80,7 +80,7 @@ public class Menu {
         System.out.println("[2] Add new customer.");
         System.out.println("[3] Add suppliers auction.");
         System.out.println("[4] List bids.");
-        System.out.println("[5] Chose auctions by date.");
+        System.out.println("[5] Choose auctions by date.");
         System.out.println("[6] Active customers.");
         System.out.println("[7] Commissions per month.");
         System.out.println("[10] Add new user.");

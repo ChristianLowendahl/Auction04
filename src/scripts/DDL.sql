@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS Auction;
-CREATE DATABASE Auction;
-Use Auction;
+DROP DATABASE IF EXISTS Auction04;
+CREATE DATABASE Auction04;
+Use Auction04;
 
 SET sql_mode = '';
 
@@ -234,9 +234,11 @@ CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdres
 
   END //
 
--- DML BOOT
+
 DELIMITER ;
 
+-- DML BOOT
+DROP VIEW IF EXISTS AllBid;
 CREATE VIEW AllBid
 AS
   SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
@@ -247,6 +249,7 @@ AS
 
 
 -- DML BOOT
+DROP VIEW IF EXISTS HigherBid;
 CREATE VIEW HigherBid
 AS
   SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
@@ -257,6 +260,7 @@ AS
   GROUP BY Auction.ID;
 
 -- DML BOOT
+DROP VIEW IF EXISTS HigherBidAN;
 CREATE VIEW HigherBidAN
 AS
   SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
@@ -267,12 +271,14 @@ AS
   GROUP BY Auction.ID, FirstName, LastName;
 
 -- DML BOOT
+DROP VIEW IF EXISTS CustomersValue;
 CREATE VIEW CustomersValue
 AS
   SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBidAN
   GROUP BY FirstName, LastName;
 
 -- DML BOOT
+DROP VIEW IF EXISTS TotalCommissionPerMonth;
 CREATE VIEW TotalCommissionPerMonth
 AS
   SELECT MONTH(Auction.EndDate) AS Month, SUM(Product.Provision) AS TotalProvision FROM Auction

@@ -42,7 +42,7 @@ public class Q3 {
             System.out.println("[" + i + "]\t\t" + s.getName());
         }
 
-        System.out.print("\nChoose a number between [1] and [" + suppliers.size() + "]\n" +
+        System.out.print("\nChose a number between [1] and [" + suppliers.size() + "]\n" +
                 "to select a supplier: ");
 
         input = sc.nextLine();
@@ -61,7 +61,7 @@ public class Q3 {
             System.out.println("[" + j + "]\t\t" + p.getName());
         }
 
-        System.out.print("\nChoose a number between [1] and [" + products.size() + "]\n" +
+        System.out.print("\nChose a number between [1] and [" + products.size() + "]\n" +
                 "to select a product from supplier " + suppliers.get(indexSupplier-1).getName() + ": ");
 
         input = sc.nextLine();

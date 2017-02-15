@@ -27,9 +27,9 @@ public class Q6 {
             while (rs.next()) {
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
-                String totalvalue = rs.getString("TotalValue");
+                String totalvalue = rs.getString("TotalOrderValue");
 
-                System.out.println("First name: " + firstName + " Last name: " + lastName + " Total value: " + totalvalue);
+                System.out.println("Customer: " + firstName + " " + lastName + "\tTotal value: " + totalvalue);
             }
 
         }catch (SQLException e){

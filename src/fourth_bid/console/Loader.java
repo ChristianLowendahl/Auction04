@@ -18,7 +18,6 @@ public class Loader {
         ArrayList<Auction> auctions = new ArrayList<>();
         ArrayList<Bid> bids = new ArrayList<>();
         ArrayList<AuctionHistory> auctionHistories = new ArrayList<>();
-        ArrayList<BiddingHistory> biddingHistories = new ArrayList<>();
 
         Connection con = null;
         Statement stm = null;
@@ -68,13 +67,6 @@ public class Loader {
             while (rs.next())
                 auctionHistories.add(new AuctionHistory(rs.getInt(1), rs.getDouble(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getInt(6), rs.getInt(7)));
 
-            stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM BiddingHistory;");
-
-            while (rs.next())
-                biddingHistories.add(new BiddingHistory(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6)));
-
-
             // SKAPA RELATIONER:
             //System.out.println("**********************");
 
@@ -103,11 +95,6 @@ public class Loader {
 
             for (AuctionHistory i : auctionHistories){
                 i.setRelation(auctions, products, customers);
-                //System.out.println(i);
-            }
-
-            for (BiddingHistory i : biddingHistories){
-                i.setRelation(bids, auctionHistories, customers);
                 //System.out.println(i);
             }
 

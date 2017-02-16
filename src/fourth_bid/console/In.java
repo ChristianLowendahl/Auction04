@@ -23,6 +23,8 @@ public class In{
             i = Integer.parseInt(inStr);
         } catch (NumberFormatException nfe) {
             System.err.println("Invalid Format!");
+            Program program = new Program();
+            program.run();
         }
         return i;
     }

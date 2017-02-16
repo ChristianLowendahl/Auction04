@@ -59,7 +59,7 @@ public class Q4 {
         {
 
             stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM AllBid;");
+            rs = stm.executeQuery("SELECT * FROM AllBid");
 
             while (rs.next()){
                 //int id = rs.getInt("ID");
@@ -71,8 +71,8 @@ public class Q4 {
 
 
                 System.out.println( "Customer: \t"  +  firstName + "\t" + lastName + "\n" +
-                                    "Product: \t" + product  + "\n" +
-                                    "Bid: \t" + higherBid + "\n");
+                        "Product: \t" + product  + "\n" +
+                        "Bid: \t" + higherBid + "\n");
             }
 
         } catch (SQLException e) {

@@ -44,6 +44,10 @@ public class Menu {
                     Q7 q7 = new Q7();
                     q7.totalComissionPerMonth();
                     break;
+                case 8:
+                    Q8 q8 = new Q8();
+                    q8.run();
+                    break;
                 case 10:
                     UserVerifier verifier = new UserVerifier();
                     verifier.addUser();
@@ -83,6 +87,7 @@ public class Menu {
         System.out.println("[5] Choose auctions by date.");
         System.out.println("[6] Active customers.");
         System.out.println("[7] Commissions per month.");
+        System.out.println("[8] Bidding History by auction.");
         System.out.println("[10] Add new user.");
 
         System.out.print("\nChoose a [number]: ");

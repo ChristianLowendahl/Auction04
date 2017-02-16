@@ -1,8 +1,6 @@
-DROP DATABASE IF EXISTS Auction04;
-CREATE DATABASE Auction04;
-Use Auction04;
-
-SET sql_mode = '';
+DROP DATABASE IF EXISTS Auction;
+CREATE DATABASE Auction;
+Use Auction;
 
 CREATE TABLE User(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -10,7 +8,6 @@ CREATE TABLE User(
   Email VARCHAR(50),
   Password VARCHAR(4)
 );
-
 
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +18,6 @@ CREATE TABLE Customer(
   Address VARCHAR(50),
   City VARCHAR(50)
 );
-
 
 CREATE TABLE Supplier(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -62,9 +58,10 @@ CREATE TABLE Bid(
 );
 
 CREATE TABLE AuctionHistory(
-  AuctionID INT PRIMARY KEY,
+  AuctionID INT PRIMARY KEY ,
   StartingBid DOUBLE,
   AcceptOffer DOUBLE,
+  FinalOffer DOUBLE,
   StartDate DATE,
   EndDate DATE,
   ProductID INT,
@@ -73,19 +70,8 @@ CREATE TABLE AuctionHistory(
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID)
 );
 
-CREATE TABLE BiddingHistory(
-  BidID INT PRIMARY KEY,
-  Price DOUBLE,
-  BidDate DATE,
-  BidTime TIME,
-  AuctionHistoryID INT,
-  CustomerID INT,
-  FOREIGN KEY (AuctionHistoryID) REFERENCES AuctionHistory (AuctionID),
-  FOREIGN KEY (CustomerID) REFERENCES Customer (ID)
-);
-
 CREATE TABLE FailedAuctionHistory (
-  AuctionID   INT PRIMARY KEY,
+  AuctionID INT PRIMARY KEY ,
   StartingBid DOUBLE,
   AcceptOffer DOUBLE,
   StartDate   DATE,
@@ -133,7 +119,8 @@ INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VA
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (400, 800,'2017-01-06','2017-01-09',8);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (600, 700,'2017-01-08','2017-01-11',4);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (800, 8000,'2017-01-10','2017-01-10',5);
-
+INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (800, 2000, '2017-02-15', '2017-02-17', 6);
+INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (200, 500, '2017-02-20', '2017-02-23', 7);
 
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-01','09:00',750, 1, 1);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-02', '11:00', 1050, 2, 1);
@@ -150,31 +137,8 @@ INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-0
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-10', '16:55', 4000, 2, 5);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-10', '16:56', 6000, 8, 5);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-10', '16:58', 8000, 3, 5);
-
-
-
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (1, 700, 1050,'2017-01-01','2017-01-04',1, 1);
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (2, 1500, 3000,'2017-01-05','2017-01-08', 2, 3);
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (3, 400, 800,'2017-01-06','2017-01-09', 8, 5);
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (4, 600, 700,'2017-01-08','2017-01-11', 4, 7);
-INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, StartDate, EndDate, ProductID, CustomerID) VALUES (5, 800, 8000,'2017-01-10','2017-01-10', 5, 8);
-
-
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (1, 750,'2017-01-01','09:00', 1, 1);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (2, 1050, '2017-01-02','11:00', 1, 2);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (3, 1800, '2017-01-05', '10:30', 2, 3);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (4, 3000, '2017-01-08', '14:15', 2, 4);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (5, 600, '2017-01-06', '03:40', 3, 5);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (6, 800, '2017-01-07', '20:05', 3, 6);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (7, 700, '2017-01-08', '14:40', 4, 7);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (8, 950, '2017-01-10', '16:50', 5, 8);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (9, 1000, '2017-01-10', '16:51', 5, 1);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (10, 2000, '2017-01-10', '16:52', 5, 2);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (11, 3000, '2017-01-10', '16:53', 5, 3);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (12, 3500, '2017-01-10', '16:54', 5, 8);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (13, 4000, '2017-01-10', '16:55', 5, 2);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (14, 6000, '2017-01-10', '16:56', 5, 8);
-INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID, CustomerID) VALUES (15, 8000, '2017-01-10', '16:58', 5, 3);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-02-15', '13:56', 0, NULL, 6);
+INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-02-20', '14:35', 0, NULL, 7);
 
 INSERT INTO User (UserName, Email, Password) VALUES ('luiz', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('isa', 'fourth@bid.com', '1234');
@@ -182,128 +146,3 @@ INSERT INTO User (UserName, Email, Password) VALUES ('dominic', 'fourth@bid.com'
 INSERT INTO User (UserName, Email, Password) VALUES ('chris', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('amanda', 'fourth@bid.com', '1234');
 INSERT INTO User (UserName, Email, Password) VALUES ('nath', 'fourth@bid.com', '1234');
-
-
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), NewPhone CHAR(15), NewEmail VARCHAR(50), NewAddress VARCHAR(50), NewCity VARCHAR(50))
-  BEGIN
-
-    INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES (NewFirstName, NewLastName, NewPhone, NewEmail, NewAddress, NewCity);
-
-  END //
-
-DELIMITER ;
-
-
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
-  BEGIN
-
-    INSERT INTO User (UserName, Email, Password) VALUES (NewUserName, NewEmail , NewPassword);
-
-  END //
-
-DELIMITER ;
-
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
-  BEGIN
-
-    INSERT INTO Product (Name, Description, Provision) VALUES (NewName, NewDescription , NewProvision);
-
-  END //
-
-DELIMITER ;
-
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
-  BEGIN
-
-    INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (NewStartingBid, NewAcceptOffer, NewStartDate, NewEndDate, NewProductID);
-  END //
-
-DELIMITER ;
-
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
-  BEGIN
-
-    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
-
-  END //
-
-
-DELIMITER ;
-
--- DML BOOT
-DROP VIEW IF EXISTS AllBid;
-CREATE VIEW AllBid
-AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
-  FROM Auction
-    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
-    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-    INNER JOIN Product ON Product.ID = Auction.ProductID;
-
-
--- DML BOOT
-DROP VIEW IF EXISTS HigherBid;
-CREATE VIEW HigherBid
-AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, MAX(Bid.Price) AS HigherBid
-  FROM Auction
-    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
-    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-    INNER JOIN Product ON Product.ID = Auction.ProductID
-  GROUP BY Auction.ID;
-
--- DML BOOT
-DROP VIEW IF EXISTS CustomersValue;
-CREATE VIEW CustomersValue
-AS
-  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
-  GROUP BY FirstName;
-
-
--- DML BOOT
-DROP VIEW IF EXISTS TotalCommissionPerMonth;
-CREATE VIEW TotalCommissionPerMonth
-AS
-  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid)*Product.Provision AS TotalCommission FROM HigherBid
-    INNER JOIN Auction ON  Auction.ID = HigherBid.ID
-    INNER JOIN Product ON Product.ID = Auction.ProductID
-  WHERE YEAR(Auction.EndDate) = (SELECT MAX(YEAR(Auction.EndDate))  FROM Auction)
-  GROUP BY MONTHNAME(Auction.EndDate)
-  ORDER BY TotalCommission DESC;
-
-
--- DML BOOT
-DELIMITER //
-
-CREATE PROCEDURE Archive_Auctions()
-
-  BEGIN
-
-    INSERT INTO AuctionHistory (AuctionID, StartingBid, AcceptOffer, FinalOffer, StartDate, EndDate, ProductID, CustomerID)
-      SELECT Auction.ID, StartingBid, AcceptOffer, MAX(Bid.Price) AS FinalOffer, Startdate, Enddate, ProductID, Bid.CustomerID FROM Auction
-        INNER JOIN Bid ON Auction.ID = Bid.AuctionID
-      WHERE Auction.EndDate < CURRENT_DATE AND Bid.Price IS NOT NULL
-      GROUP BY ProductID, Bid.CustomerID;
-
-
-  END//
-
-DELIMITER ;
-
-CREATE EVENT Event_Finished_Auction
-  ON SCHEDULE EVERY 1 DAY
-  STARTS '2017-01-01 00:00:00'
-DO
-  CALL Archive_Auctions();
-
-

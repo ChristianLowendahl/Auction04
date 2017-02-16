@@ -2,6 +2,7 @@ package fourth_bid.console;
 
 import java.sql.SQLException;
 import fourth_bid.applications.*;
+import fourth_bid.applications.Q8;
 
 public class Menu {
 

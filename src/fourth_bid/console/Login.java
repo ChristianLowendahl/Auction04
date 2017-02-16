@@ -17,7 +17,7 @@ public class Login {
         }
 
         String user = "root";
-        String pass = "nack";
+        String pass = "ilu";
         String host = "localhost";
         String database = "Auction";
 

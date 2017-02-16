@@ -1,4 +1,5 @@
--- DML BOOT
+-- APP Lägga in en ny kund
+
 DELIMITER //
 CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), NewPhone CHAR(15), NewEmail VARCHAR(50), NewAddress VARCHAR(50), NewCity VARCHAR(50))
   BEGIN
@@ -9,8 +10,8 @@ CREATE PROCEDURE AddCustomer(NewFirstName VARCHAR(50), NewLastName VARCHAR(50), 
 
 DELIMITER ;
 
+-- APP Extra tillägg, Gunnar vill ha extra säkerhet.
 
--- DML BOOT
 DELIMITER //
 CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassword VARCHAR(4))
   BEGIN
@@ -21,7 +22,20 @@ CREATE PROCEDURE AddUser(NewUserName VARCHAR(50), NewEmail VARCHAR(50), NewPassw
 
 DELIMITER ;
 
--- 1.Registrera en produkt
+--  APP Lägga in en ny leverantör
+
+DELIMITER //
+CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
+  BEGIN
+
+    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
+
+  END //
+
+DELIMITER ;
+
+-- 1. Lägg till ny produkt
+
 DELIMITER //
 CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), NewProvision INT)
   BEGIN
@@ -32,7 +46,9 @@ CREATE PROCEDURE AddProduct(NewName VARCHAR(50), NewDescription VARCHAR(200), Ne
 
 DELIMITER ;
 
+
 -- 2. Skapa en auktion utifrån en viss produkt där man kan sätta utgångspris, acceptpris samt start och slutdatum för auktionen.
+
 DELIMITER //
 CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate DATE, NewEndDate DATE, NewProductID INT)
   BEGIN
@@ -42,29 +58,9 @@ CREATE PROCEDURE AddAuction(NewStartingBid INT, NewAcceptOffer INT, NewStartDate
 
 DELIMITER ;
 
--- DML BOOT
-DELIMITER //
-CREATE PROCEDURE AddSupplier(NewName VARCHAR(50), NewEmail VARCHAR(50), NewAdress VARCHAR(50), NewCity VARCHAR(50))
-  BEGIN
 
-    INSERT INTO Supplier (Name, Email, Address, City) VALUES (NewName, NewEmail , NewAdress, NewCity);
+-- 3. Lista pågående auktioner samt kunna se det högsta budet och vilken kund som lagt det.
 
-  END //
-
-
-DELIMITER ;
-
--- Se budhistoriken på en viss auktion, samt vilka kunder som lagt buden
-DROP VIEW IF EXISTS AllBid;
-CREATE VIEW AllBid
-AS
-  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
-  FROM Auction
-    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
-    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
-    INNER JOIN Product ON Product.ID = Auction.ProductID;
-
--- DML BOOT
 DROP VIEW IF EXISTS HigherBid;
 CREATE VIEW HigherBid
 AS
@@ -78,27 +74,35 @@ AS
     INNER JOIN Product ON Auction.ProductID = Product.ID
   WHERE Bid.Price = tempBid.HigherBid;
 
--- DML BOOT
-DROP VIEW IF EXISTS CustomersValue;
-CREATE VIEW CustomersValue
+-- 4. Se budhistoriken på en viss auktion, samt vilka kunder som lagt buden
+
+
+SELECT BidDate AS Date, BidTime AS Time, Price, Customer.FirstName AS 'First name', Customer.LastName AS 'Last name' FROM Bid
+  INNER JOIN Customer ON Bid.CustomerID = Customer.ID
+WHERE AuctionID = 2;
+
+-- 5. Vilka auktioner avslutas under ett visst datumintervall? Samt vad blir provisionen för varje auktion inom det intervallet?
+
+SELECT AuctionHistory.AuctionID AS Auction, Product.Name AS Product, AuctionHistory.EndDate AS 'End date', ROUND((MAX(Price) * Product.Provision/100)) AS Commission FROM BiddingHistory
+  INNER JOIN AuctionHistory ON BiddingHistory.AuctionHistoryID = AuctionHistory.AuctionID
+  INNER JOIN Product ON AuctionHistory.ProductID = Product.ID
+WHERE AuctionHistory.EndDate BETWEEN '2017-01-01' AND '2017-01-31'
+GROUP BY Auction;
+
+DROP VIEW IF EXISTS AllBid;
+CREATE VIEW AllBid
 AS
-  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
-  GROUP BY FirstName, LastName;
+  SELECT  Auction.ID, Customer.FirstName, Customer.LastName, Product.Name AS Product, Bid.Price AS HigherBid
+  FROM Auction
+    INNER JOIN Bid ON Bid.AuctionID = Auction.ID
+    INNER JOIN Customer ON Customer.ID = Bid.CustomerID
+    INNER JOIN Product ON Product.ID = Auction.ProductID;
 
 
--- DML BOOT
-DROP VIEW IF EXISTS TotalCommissionPerMonth;
-CREATE VIEW TotalCommissionPerMonth
-AS
-  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid)*Product.Provision AS TotalCommission FROM HigherBid
-    INNER JOIN Auction ON  Auction.ID = HigherBid.AuctionID
-    INNER JOIN Product ON Product.ID = Auction.ProductID
-  WHERE YEAR(Auction.EndDate) = (SELECT MAX(YEAR(Auction.EndDate))  FROM Auction)
-  GROUP BY MONTHNAME(Auction.EndDate)
-  ORDER BY TotalCommission DESC;
 
+-- 6. Om en auktion avslutas utan något bud så skall denna föras in i en egen tabell
+-- 7. När en auktion är avslutad och det finns en köpare så skall auktionen flyttas till en auktionshistoriktabell.
 
--- DML BOOT
 DROP PROCEDURE IF EXISTS Archive_Auctions;
 DELIMITER //
 CREATE PROCEDURE Archive_Auctions()
@@ -119,6 +123,9 @@ CREATE PROCEDURE Archive_Auctions()
         RIGHT JOIN Product ON Auction.ProductID = Product.ID
       WHERE Bid.Price = 0;
 
+    DELETE FROM Auction WHERE Auction.ID IN (SELECT AuctionID FROM AuctionHistory);
+    DELETE FROM Auction WHERE Auction.ID IN (SELECT AuctionID FROM FailedAuctionHistory);
+
   END//
 DELIMITER ;
 
@@ -127,3 +134,26 @@ CALL Archive_Auctions();
 SELECT * FROM AuctionHistory;
 
 SELECT * FROM FailedAuctionHistory;
+
+SELECT * FROm Auction;
+
+-- 8. Visa en kundlista på alla kunder som köpt något, samt vad deras totala ordervärde är.
+
+DROP VIEW IF EXISTS CustomersValue;
+CREATE VIEW CustomersValue
+AS
+  SELECT FirstName, LastName, SUM(HigherBid) AS TotalOrderValue FROM HigherBid
+  GROUP BY FirstName, LastName;
+
+
+-- 9. Vad den totala provisionen är per månad?
+
+DROP VIEW IF EXISTS TotalCommissionPerMonth;
+CREATE VIEW TotalCommissionPerMonth
+AS
+  SELECT MONTHNAME(Auction.EndDate) AS Month, SUM(HigherBid.HigherBid)*Product.Provision AS TotalCommission FROM HigherBid
+    INNER JOIN Auction ON  Auction.ID = HigherBid.AuctionID
+    INNER JOIN Product ON Product.ID = Auction.ProductID
+  WHERE YEAR(Auction.EndDate) = (SELECT MAX(YEAR(Auction.EndDate))  FROM Auction)
+  GROUP BY MONTHNAME(Auction.EndDate)
+  ORDER BY TotalCommission DESC;

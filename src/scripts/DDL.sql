@@ -54,7 +54,7 @@ CREATE TABLE Bid(
   CustomerID INT,
   AuctionID INT,
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID),
-  FOREIGN KEY (AuctionID) REFERENCES Auction (ID)
+  FOREIGN KEY (AuctionID) REFERENCES Auction (ID) ON DELETE CASCADE
 );
 
 CREATE TABLE AuctionHistory(

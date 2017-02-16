@@ -1,10 +1,7 @@
 package fourth_bid.applications;
 
 import fourth_bid.console.Login;
-import fourth_bid.console.Menu;
 import fourth_bid.models.Auction;
-import fourth_bid.models.Product;
-import fourth_bid.models.Supplier;
 
 import java.io.IOException;
 import java.sql.*;

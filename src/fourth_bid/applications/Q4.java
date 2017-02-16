@@ -112,7 +112,7 @@ public class Q4 {
             rs = stm.executeQuery("SELECT * FROM HigherBid");
 
             while (rs.next()){
-                int id = rs.getInt("ID");
+                int id = rs.getInt("AuctionID");
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 String product = rs.getString("Product");

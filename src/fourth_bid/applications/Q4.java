@@ -19,6 +19,9 @@ public class Q4 {
 
         String  str = In.inText();
         switch (str) {
+            case "choose":
+                Q8 q8 = new Q8();
+                q8.run();
             case "all":
                 listAllBid();
                 break;
@@ -38,6 +41,7 @@ public class Q4 {
 
     private void printSubMenu(){
         System.out.println("\n***************************************\n");
+        System.out.println("Write 'choose' to show bid history by auction.");
         System.out.println("Write 'all' to show all bids.");
         System.out.println("Write 'higher' to show only the higher bids.");
         System.out.println("Write 'menu' to go back to menu.");

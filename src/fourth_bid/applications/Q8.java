@@ -1,6 +1,7 @@
 package fourth_bid.applications;
 
 import fourth_bid.console.Login;
+import fourth_bid.console.Menu;
 import fourth_bid.models.Auction;
 
 import java.io.IOException;
@@ -125,6 +126,8 @@ public class Q8 {
                 e.printStackTrace();
             }
 
+            Menu menu = new Menu();
+            menu.goBackToMenu();
         }
 
     }

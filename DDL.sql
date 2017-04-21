@@ -1,4 +1,7 @@
-Use Auction;
+DROP DATABASE IF EXISTS Auction04;
+CREATE DATABASE Auction04;
+Use Auction04;
+
 CREATE TABLE Customer(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   FirstName VARCHAR(50),
@@ -8,6 +11,7 @@ CREATE TABLE Customer(
   Address VARCHAR(50),
   City VARCHAR(50)
 );
+
 CREATE TABLE Supplier(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(50),
@@ -15,13 +19,14 @@ CREATE TABLE Supplier(
   Address VARCHAR(50),
   City VARCHAR(50)
 );
+
 CREATE TABLE Product(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   Name VARCHAR(50),
   Description VARCHAR(200),
-  Provision INT,
-  FOREIGN KEY (SupplierID) REFERENCES Supplier (ID)
+  Provision INT
 );
+
 CREATE TABLE Auction(
   ID Int AUTO_INCREMENT PRIMARY KEY,
   StartingBid INT,
@@ -31,6 +36,7 @@ CREATE TABLE Auction(
   ProductID INT,
   FOREIGN KEY (ProductID) REFERENCES Product(ID)
 );
+
 CREATE TABLE Bid(
   ID INT AUTO_INCREMENT PRIMARY KEY,
   BidDate DATE,
@@ -41,23 +47,29 @@ CREATE TABLE Bid(
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID),
   FOREIGN KEY (AuctionID) REFERENCES Auction (ID)
 );
-CREATE TABLE BiddingHistory(
-  BidID INT,
-  Price INT,
-  BidDate DATE,
-  BidTime TIME,
-  AuctionHistoryID INT,
-  FOREIGN KEY (AuctionHistoryID) REFERENCES AuctionHistory (ID),
-);
+
 CREATE TABLE AuctionHistory(
-  AuctionID INT,
+  AuctionID INT PRIMARY KEY,
   StartingBid INT,
   AcceptOffer INT,
   StartDate DATE,
   EndDate DATE,
+  ProductID INT,
+  CustomerID INT,
   FOREIGN KEY (ProductID) REFERENCES Product (ID),
   FOREIGN KEY (CustomerID) REFERENCES Customer (ID)
 );
+
+CREATE TABLE BiddingHistory(
+  BidID INT PRIMARY KEY,
+  Price INT,
+  BidDate DATE,
+  BidTime TIME,
+  AuctionHistoryID INT,
+  FOREIGN KEY (AuctionHistoryID) REFERENCES AuctionHistory (AuctionID)
+);
+
+
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Anna', 'Andersson', '0701111111', 'annas@mail.se', 'gatan 7', 'Stockholm');
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Jessica', 'Svensson', '0732345678', 'Jessica@mail.se', 'Näckrosgatan 11', 'Stockholm');
 INSERT INTO Customer (FirstName, LastName, Phone, Email, Address, City) VALUES ('Rickard', 'Asplund', '0708564345', 'rickard@mail.se', 'Storgatan 10', 'Göteborg');
@@ -106,7 +118,7 @@ INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VA
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (350, 1000,'2017-02-05','2017-02-08',12);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (250, 900,'2017-02-20','2017-02-23',13);
 INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (400, 800,'2017-02-25','2017-02-28',14);
-INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (600, 1200,'2017-02-26','2017-02-29',15);
+INSERT INTO Auction (StartingBid, AcceptOffer, StartDate, EndDate, ProductID) VALUES (600, 1200,'2017-02-26','2017-02-28',15);
 
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-01','09:00',750, 1, 1);
 INSERT INTO Bid (BidDate, BidTime, Price, CustomerID, AuctionID) VALUES ('2017-01-02', '11:00', 1050, 2, 1);
@@ -135,4 +147,3 @@ INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VA
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (6, 800, '2017-01-07', '20:05', 3);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (7, 700, '2017-01-08', '14:40', 4);
 INSERT INTO BiddingHistory (BidID, Price, BidDate, BidTime, AuctionHistoryID) VALUES (8, 950, '2017-01-10', '16:50', 5);
-
